@@ -23,7 +23,7 @@ module.exports = {
 				unique: true,
 			},
 			cpfOrCnpj: {
-				type: Sequelize.STRING(15),
+				type: Sequelize.STRING(14),
 				allowNull: false,
 				unique: true,
 			},

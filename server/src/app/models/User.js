@@ -12,6 +12,8 @@ class User extends Model {
 				},
 				name: Sequelize.STRING,
 				email: Sequelize.STRING,
+				phone: Sequelize.STRING(15),
+				cpfOrCnpj: Sequelize.STRING(14),
 				password: Sequelize.VIRTUAL,
 				passwordHash: Sequelize.STRING,
 			},
