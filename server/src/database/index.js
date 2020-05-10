@@ -6,9 +6,10 @@ import databaseConfig from '../configs/database'
 import User from '../app/models/User'
 import File from '../app/models/File'
 import AclRole from '../app/models/AclRole'
+import Company from '../app/models/Company'
 
 // Insert new models here
-const models = [User, File, AclRole]
+const models = [User, File, AclRole, Company]
 
 class Database {
 	constructor() {
