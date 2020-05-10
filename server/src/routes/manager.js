@@ -3,6 +3,7 @@ import { Router } from 'express'
 import authMiddleware from '../app/middlewares/auth'
 
 import validateUserStore from '../app/validators/UserStore'
+import validateCompanyStore from '../app/validators/CompanyStore'
 import validateUserUpdate from '../app/validators/UserUpdate'
 
 import UserController from '../app/controllers/Manager/UserController'
@@ -11,7 +12,12 @@ const routes = Router()
 
 routes.get('/', (req, res) => res.json({ message: 'Hello from Athos api' }))
 
-routes.post('/users', validateUserStore, UserController.store)
+routes.post(
+	'/users',
+	validateUserStore,
+	validateCompanyStore,
+	UserController.store
+)
 
 routes.use(authMiddleware)
 
