@@ -1,5 +1,3 @@
-# athos
+# VadeBus
 
-base de projetos da montssign
-
-## Ainda é um protótipo
+VádeBus é um projeto criado para auxiliar empresas de transporte no controle e leitura de informações e demanda.
