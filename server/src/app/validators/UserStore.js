@@ -4,7 +4,7 @@ import Exception from '../exceptions/Exception'
 export default async (req, res, next) => {
 	try {
 		const schema = Yup.object().shape({
-			name: Yup.string().min(6).required(),
+			name: Yup.string().min(3).required(),
 			email: Yup.string().email().required(),
 			password: Yup.string().min(6).required(),
 		})
