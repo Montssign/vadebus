@@ -14,6 +14,7 @@ class Company extends Model {
 				address: Sequelize.TEXT,
 				email: Sequelize.STRING,
 				phone: Sequelize.STRING,
+				cnpj: Sequelize.STRING(14),
 				active: Sequelize.BOOLEAN,
 			},
 			{

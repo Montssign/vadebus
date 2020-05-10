@@ -28,6 +28,10 @@ module.exports = {
 				type: Sequelize.STRING(15),
 				allowNull: false,
 			},
+			cnpj: {
+				type: Sequelize.STRING(14),
+				allowNull: false,
+			},
 			active: {
 				type: Sequelize.BOOLEAN,
 				allowNull: false,
