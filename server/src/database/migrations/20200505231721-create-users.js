@@ -19,7 +19,7 @@ module.exports = {
 			},
 			phone: {
 				type: Sequelize.STRING(15),
-				allowNull: false,
+				allowNull: true,
 				unique: true,
 			},
 			cpfOrCnpj: {
