@@ -1,0 +1,13 @@
+{
+  "name": "athos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Montssign/athos.git",
+  "author": "Felipe D S Lima <felipe@monts.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node dev.js",
+    "start": "yarn --cwd server start"
+  }
+}

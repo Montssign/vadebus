@@ -1,0 +1,13 @@
+# Defaults
+node_modules
+yarn-error.log
+.vscode
+
+# Environment
+public
+.env
+tmp
+
+# Tests
+__tests__/coverage
+__tests__/database.sqlite
