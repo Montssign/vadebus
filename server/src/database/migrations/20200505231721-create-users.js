@@ -24,7 +24,7 @@ module.exports = {
 			},
 			cpfOrCnpj: {
 				type: Sequelize.STRING(14),
-				allowNull: false,
+				allowNull: true,
 				unique: true,
 			},
 			passwordHash: {
