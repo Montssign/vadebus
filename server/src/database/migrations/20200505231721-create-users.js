@@ -17,6 +17,16 @@ module.exports = {
 				allowNull: false,
 				unique: true,
 			},
+			phone: {
+				type: Sequelize.STRING(15),
+				allowNull: false,
+				unique: true,
+			},
+			cpfOrCnpj: {
+				type: Sequelize.STRING(15),
+				allowNull: false,
+				unique: true,
+			},
 			passwordHash: {
 				type: Sequelize.STRING,
 				allowNull: false,

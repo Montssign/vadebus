@@ -31,6 +31,7 @@ module.exports = {
 			cnpj: {
 				type: Sequelize.STRING(14),
 				allowNull: false,
+				unique: true,
 			},
 			active: {
 				type: Sequelize.BOOLEAN,
