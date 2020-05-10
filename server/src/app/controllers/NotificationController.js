@@ -15,8 +15,12 @@ class NotificationController {
 	}
 
 	async update(req, res) {
-		const notification = await Notification.findOneAndUpdate(
-			{ _id: req.params.id, user: req.user.id },
+		const notify = await Notification.findOne({
+			_id: req.params.id,
+			user: req.user.id,
+		})
+		const notification = await Notification.findByIdAndUpdate(
+			notify._id,
 			{ read: true },
 			{ new: true }
 		)

@@ -18,6 +18,7 @@ module.exports = {
   },
   rules: {
 		'prettier/prettier': 'error',
+		'no-underscore-dangle': 'off',
     'class-methods-use-this': 'off',
     'no-param-reassign': 'off',
     'no-unused-vars': ['error', {argsIgnorePattern: 'next'}],
