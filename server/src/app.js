@@ -16,6 +16,7 @@ import './database'
 import routes from './routes'
 import sentryConfig from './configs/sentry'
 import redisConfig from './configs/redis'
+import Exception from './app/exceptions/Exception'
 
 const whiteList = [process.env.ORIGIN_URL]
 const corsOptions = {
@@ -69,10 +70,13 @@ class App {
 
 	routes() {
 		this.server.use(express.static(path.resolve(__dirname, '..', 'public')))
+
 		this.server.use('/api', routes)
+
 		this.server.use('/api', () => {
-			throw new Error()
+			throw new Exception({ status: 404 })
 		})
+
 		this.server.use('*.json', (req, res) =>
 			res.sendFile(
 				path.resolve(__dirname, '..', path.join('public', req.baseUrl))
