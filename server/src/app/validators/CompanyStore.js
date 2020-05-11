@@ -4,11 +4,16 @@ import Exception from '../exceptions/Exception'
 export default async (req, res, next) => {
 	try {
 		const schema = Yup.object().shape({
-			name: Yup.string().required(),
-			companyName: Yup.string().required(),
-			address: Yup.string().required(),
-			cnpj: Yup.string().max(14).required(),
-			phone: Yup.string().required(),
+			company: Yup.object()
+				.shape({
+					name: Yup.string().required(),
+					companyName: Yup.string().required(),
+					address: Yup.string().required(),
+					email: Yup.string().email(),
+					phone: Yup.string().required(),
+					cnpj: Yup.string().max(14).required(),
+				})
+				.required(),
 		})
 
 		await schema.validate(req.body, { abortEarly: false })
