@@ -27,7 +27,7 @@ class CreateUserService {
 
 		user.addRole(aclRole)
 
-		const { id, name, email } = user
+		const { id, name, email, phone, cpfOrCnpj } = user
 
 		await Notification.create({
 			content: `Seja muito bem vindo(a) ao Athos ${name}!`,
@@ -35,7 +35,14 @@ class CreateUserService {
 		})
 
 		await Queue.add(WelcomeMail.key, { name, email })
-		return { id, name, email, roles: [{ name: aclRole.name }] }
+		return {
+			id,
+			name,
+			email,
+			phone,
+			cpfOrCnpj,
+			roles: [{ name: aclRole.name }],
+		}
 	}
 }
 

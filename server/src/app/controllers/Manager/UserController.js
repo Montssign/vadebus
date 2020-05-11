@@ -6,16 +6,20 @@ import Exception from '../../exceptions/Exception'
 
 class UserController {
 	async store(req, res) {
+		const reqCompany = req.body.company
+		delete req.body.company
+
 		const user = await CreateUserService.run({
-			userData: req.body,
+			userData: { ...req.body, cpfOrCnpj: reqCompany.cnpj },
 			role: 'manager',
 		})
 
 		const addUser = await User.findByPk(user.id)
 
 		const company = await Company.create({
-			...req.body.company,
-			email: user.email,
+			...reqCompany,
+			email: reqCompany.email || user.email,
+			phone: reqCompany.phone || user.phone,
 		})
 
 		if (!company) {
@@ -25,17 +29,7 @@ class UserController {
 
 		company.addUser(addUser)
 
-		user.company = {
-			id: company.id,
-			email: company.email,
-			phone: company.phone,
-			name: company.name,
-			companyName: company.companyName,
-			address: company.address,
-			cnpj: company.cnpj,
-		}
-
-		return res.json(user)
+		return res.status(201).json(user)
 	}
 
 	async update(req, res) {

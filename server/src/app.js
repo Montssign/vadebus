@@ -98,11 +98,16 @@ class App {
 				process.env.NODE_ENV === 'test'
 			) {
 				const errors = await new Youch(err, req).toJSON()
+				errors.data = err.data || []
 				return res.status(status).json(errors)
 			}
 
 			return res.status(status).json({
-				message: err.status === 500 ? 'Internal server error' : err.message,
+				error: {
+					message: err.status === 500 ? 'Internal server error' : err.message,
+					name: err.status === 500 ? 'Internal server error' : err.name,
+					status,
+				},
 				data: err.data || [],
 			})
 		})

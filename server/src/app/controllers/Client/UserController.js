@@ -8,7 +8,7 @@ class UserController {
 			role: 'client',
 		})
 
-		return res.json(user)
+		return res.status(201).json(user)
 	}
 
 	async update(req, res) {

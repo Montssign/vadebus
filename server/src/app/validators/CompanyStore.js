@@ -10,7 +10,7 @@ export default async (req, res, next) => {
 					companyName: Yup.string().required(),
 					address: Yup.string().required(),
 					email: Yup.string().email(),
-					phone: Yup.string().required(),
+					phone: Yup.string(),
 					cnpj: Yup.string().max(14).required(),
 				})
 				.required(),

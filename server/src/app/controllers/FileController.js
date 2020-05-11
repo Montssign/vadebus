@@ -53,7 +53,7 @@ class FileController {
 			})
 		)
 
-		return res.json(files)
+		return res.status(201).json(files)
 	}
 }
 
