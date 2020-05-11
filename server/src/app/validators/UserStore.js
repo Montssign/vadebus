@@ -8,6 +8,7 @@ export default async (req, res, next) => {
 			email: Yup.string().email().required(),
 			password: Yup.string().min(6).required(),
 			role: Yup.string(),
+			login: Yup.string(),
 			phone:
 				req.path.indexOf('/manager/users') >= 0
 					? Yup.string().required()
