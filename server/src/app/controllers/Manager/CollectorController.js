@@ -51,7 +51,12 @@ class CollectorController {
 			attributes: ['id', 'name', 'email', 'login', 'phone', 'cpfOrCnpj'],
 			where: { companyId: req.user.companyId },
 			include: [
-				{ model: AclRole, as: 'roles', through: { attributes: [] } },
+				{
+					model: AclRole,
+					as: 'roles',
+					attributes: ['name'],
+					through: { attributes: [] },
+				},
 				{ model: File, as: 'avatar', attributes: ['id', 'path', 'url'] },
 			],
 		})
