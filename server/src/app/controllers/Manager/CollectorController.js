@@ -5,6 +5,8 @@ import UpdateUserService from '../../services/UpdateUserService'
 import User from '../../models/User'
 import AclRole from '../../models/AclRole'
 import File from '../../models/File'
+import Exception from '../../exceptions/Exception'
+import Company from '../../models/Company'
 
 class CollectorController {
 	async index(req, res) {
@@ -43,6 +45,23 @@ class CollectorController {
 		const { id, name, email, roles } = user
 
 		return res.status(201).json({ id, name, email, roles })
+	}
+
+	async show(req, res) {
+		const collector = await User.findByPk(req.params.id, {
+			attributes: ['id', 'name', 'email', 'login', 'phone', 'cpfOrCnpj'],
+			where: { companyId: req.user.companyId },
+			include: [
+				{ model: AclRole, as: 'roles', through: { attributes: [] } },
+				{ model: File, as: 'avatar', attributes: ['id', 'path', 'url'] },
+			],
+		})
+
+		if (!collector) {
+			throw new Exception({ status: 404 })
+		}
+
+		return res.json(collector)
 	}
 
 	async update(req, res) {

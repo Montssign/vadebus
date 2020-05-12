@@ -30,7 +30,10 @@ routes.put('/users', validateUserUpdate, UserController.update)
 // Collectors
 routes.get('/collectors', CollectorController.index)
 routes.post('/collectors', validateCollectorStore, CollectorController.store)
+routes.get('/collectors/:id', CollectorController.show)
 routes.put('/collectors/:id', CollectorController.update)
 routes.delete('/collectors/:id', CollectorController.destroy)
+
+//
 
 export default routes
