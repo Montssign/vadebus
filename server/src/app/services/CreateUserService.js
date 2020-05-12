@@ -16,33 +16,37 @@ class CreateUserService {
 			})
 		}
 
-		const user = await User.create(userData)
+		const createdUser = await User.create(userData)
 
 		const aclRole = await AclRole.findOne({ where: { name: role } })
 
 		if (!aclRole) {
-			await user.destroy({ force: true })
+			await createdUser.destroy({ force: true })
 			throw new Exception({ status: 400, message: 'Invalid role' })
 		}
 
-		user.addRole(aclRole)
+		await createdUser.addRole(aclRole)
 
-		const { id, name, email, phone, cpfOrCnpj } = user
+		const { id, name, email } = createdUser
 
 		await Notification.create({
-			content: `Seja muito bem vindo(a) ao Athos ${name}!`,
+			content: `Seja muito bem vindo(a) ao VádeBus ${name}!`,
 			user: id,
 		})
 
+		const user = await User.findByPk(id, {
+			include: [
+				{
+					model: AclRole,
+					as: 'roles',
+					attributes: ['name'],
+					through: { attributes: [] },
+				},
+			],
+		})
+
 		await Queue.add(WelcomeMail.key, { name, email })
-		return {
-			id,
-			name,
-			email,
-			phone,
-			cpfOrCnpj,
-			roles: [{ name: aclRole.name }],
-		}
+		return user
 	}
 }
 
