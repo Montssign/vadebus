@@ -45,10 +45,9 @@ class User extends Model {
 			foreignKey: 'userId',
 			as: 'roles',
 		})
-		this.belongsToMany(models.Company, {
-			through: 'CompanyUser',
-			foreignKey: 'userId',
-			as: 'companies',
+		this.belongsTo(models.Company, {
+			foreignKey: 'companyId',
+			as: 'company',
 		})
 	}
 }
