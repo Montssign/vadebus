@@ -5,6 +5,7 @@ class FleetController {
 	async index(req, res) {
 		const fleets = await Fleet.findAll({
 			where: { companyId: req.user.companyId },
+			attributes: ['id', 'brand', 'plate', 'number', 'seats'],
 		})
 
 		return res.json(fleets)
@@ -28,7 +29,9 @@ class FleetController {
 			throw new Exception({ status: 404 })
 		}
 
-		return res.json(fleet)
+		const { id, brand, plate, number, seats } = fleet
+
+		return res.json({ id, brand, plate, number, seats })
 	}
 
 	async update(req, res) {
