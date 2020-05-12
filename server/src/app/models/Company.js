@@ -31,6 +31,7 @@ class Company extends Model {
 			foreignKey: 'companyId',
 			as: 'users',
 		})
+		this.hasMany(models.Fleet, { foreignKey: 'companyId', as: 'fleets' })
 	}
 }
 
