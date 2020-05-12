@@ -1,7 +1,6 @@
 import UpdateUserService from '../../services/UpdateUserService'
 import Company from '../../models/Company'
 import CreateUserService from '../../services/CreateUserService'
-import User from '../../models/User'
 import Exception from '../../exceptions/Exception'
 
 class UserController {
@@ -14,22 +13,24 @@ class UserController {
 			role: 'manager',
 		})
 
-		const addUser = await User.findByPk(user.id)
+		try {
+			const company = await Company.create({
+				...reqCompany,
+				email: reqCompany.email || user.email,
+				phone: reqCompany.phone || user.phone,
+			})
 
-		const company = await Company.create({
-			...reqCompany,
-			email: reqCompany.email || user.email,
-			phone: reqCompany.phone || user.phone,
-		})
+			user.companyId = company.id
+			await user.save()
+		} catch (err) {
+			user.destroy({ force: true })
 
-		if (!company) {
-			await addUser.destroy({ force: true })
 			throw new Exception({ status: 500 })
 		}
 
-		company.addUser(addUser)
+		const { id, name, email, roles } = user
 
-		return res.status(201).json(user)
+		return res.status(201).json({ id, name, email, roles })
 	}
 
 	async update(req, res) {
