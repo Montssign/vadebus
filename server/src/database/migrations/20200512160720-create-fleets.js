@@ -15,6 +15,7 @@ module.exports = {
 			plate: {
 				type: Sequelize.STRING,
 				allowNull: false,
+				unique: true,
 			},
 			number: {
 				type: Sequelize.STRING,
