@@ -9,6 +9,8 @@ import client from './client'
 import redisConfig from '../configs/redis'
 import multerConfg from '../configs/multer'
 
+import setNullEmptyMiddleware from '../app/middlewares/setNullEmpty'
+
 import validateSessionStore from '../app/validators/SessionStore'
 
 import SessionController from '../app/controllers/SessionController'
@@ -17,6 +19,8 @@ import NotificationController from '../app/controllers/NotificationController'
 
 const routes = Router()
 const upload = multer(multerConfg)
+
+routes.use(setNullEmptyMiddleware)
 
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
 	routes.post('/sessions', validateSessionStore, SessionController.store)
