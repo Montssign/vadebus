@@ -6,7 +6,6 @@ import User from '../../models/User'
 import AclRole from '../../models/AclRole'
 import File from '../../models/File'
 import Exception from '../../exceptions/Exception'
-import Company from '../../models/Company'
 
 class CollectorController {
 	async index(req, res) {
@@ -77,7 +76,8 @@ class CollectorController {
 
 	async destroy(req, res) {
 		const { id } = req.params
-		await User.destroy({ where: { id }, force: true })
+		const { force } = req.body
+		await User.destroy({ where: { id }, force })
 
 		return res.status(204).json()
 	}
