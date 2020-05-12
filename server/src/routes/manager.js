@@ -43,10 +43,10 @@ routes.put(
 routes.delete('/collectors/:id', CollectorController.destroy)
 
 // Fleet
-routes.get('/collectors', FleetController.index)
-routes.post('/collectors', validateFleetStore, FleetController.store)
-routes.get('/collectors/:id', FleetController.show)
-routes.put('/collectors/:id', validateFleetUpdate, FleetController.update)
-routes.delete('/collectors/:id', FleetController.destroy)
+routes.get('/fleets', FleetController.index)
+routes.post('/fleets', validateFleetStore, FleetController.store)
+routes.get('/fleets/:id', FleetController.show)
+routes.put('/fleets/:id', validateFleetUpdate, FleetController.update)
+routes.delete('/fleets/:id', FleetController.destroy)
 
 export default routes
