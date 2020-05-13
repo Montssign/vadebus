@@ -10,10 +10,16 @@ import validateCollectorStore from '../app/validators/CollectorStore'
 import validateCollectorUpdate from '../app/validators/CollectorUpdate'
 import validateFleetStore from '../app/validators/FleetStore'
 import validateFleetUpdate from '../app/validators/FleetUpdate'
+import validateRouteStore from '../app/validators/RouteStore'
+import validateRouteUpdate from '../app/validators/RouteUpdate'
+import validatePointStore from '../app/validators/PointStore'
+import validatePointUpdate from '../app/validators/PointUpdate'
 
 import UserController from '../app/controllers/Manager/UserController'
 import CollectorController from '../app/controllers/Manager/CollectorController'
 import FleetController from '../app/controllers/Manager/FleetController'
+import RouteController from '../app/controllers/Manager/RouteController'
+import PointController from '../app/controllers/Manager/PointController'
 
 const routes = Router()
 
@@ -48,5 +54,19 @@ routes.post('/fleets', validateFleetStore, FleetController.store)
 routes.get('/fleets/:id', FleetController.show)
 routes.put('/fleets/:id', validateFleetUpdate, FleetController.update)
 routes.delete('/fleets/:id', FleetController.destroy)
+
+// Routes
+routes.get('/routes', RouteController.index)
+routes.post('/routes', validateRouteStore, RouteController.store)
+routes.get('/routes/:id', RouteController.show)
+routes.put('/routes/:id', validateRouteUpdate, RouteController.update)
+routes.delete('/routes/:id', RouteController.destroy)
+
+// Points
+routes.get('/points', PointController.index)
+routes.post('/points', validatePointStore, PointController.store)
+routes.get('/points/:id', PointController.show)
+routes.put('/points/:id', validatePointUpdate, PointController.update)
+routes.delete('/points/:id', PointController.destroy)
 
 export default routes

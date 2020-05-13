@@ -8,9 +8,10 @@ import File from '../app/models/File'
 import AclRole from '../app/models/AclRole'
 import Company from '../app/models/Company'
 import Fleet from '../app/models/Fleet'
+import Route from '../app/models/Route'
+import Point from '../app/models/Point'
 
-// Insert new models here
-const models = [User, File, AclRole, Company, Fleet]
+const models = [User, File, AclRole, Company, Fleet, Route, Point]
 
 class Database {
 	constructor() {
