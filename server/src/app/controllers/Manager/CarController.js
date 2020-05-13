@@ -1,18 +1,18 @@
-import Fleet from '../../models/Fleet'
+import Car from '../../models/Car'
 import Exception from '../../exceptions/Exception'
 
-class FleetController {
+class CarController {
 	async index(req, res) {
-		const fleets = await Fleet.findAll({
+		const cars = await Car.findAll({
 			where: { companyId: req.user.companyId },
 			attributes: ['id', 'brand', 'plate', 'number', 'seats'],
 		})
 
-		return res.json(fleets)
+		return res.json(cars)
 	}
 
 	async store(req, res) {
-		const { id, brand, plate, number, seats } = await Fleet.create({
+		const { id, brand, plate, number, seats } = await Car.create({
 			...req.body,
 			companyId: req.user.companyId,
 		})
@@ -21,27 +21,27 @@ class FleetController {
 	}
 
 	async show(req, res) {
-		const fleet = await Fleet.findByPk(req.params.id, {
+		const car = await Car.findByPk(req.params.id, {
 			attributes: ['id', 'brand', 'plate', 'number', 'seats', 'companyId'],
 		})
 
-		if (fleet.companyId !== req.user.companyId) {
+		if (car.companyId !== req.user.companyId) {
 			throw new Exception({ status: 404 })
 		}
 
-		const { id, brand, plate, number, seats } = fleet
+		const { id, brand, plate, number, seats } = car
 
 		return res.json({ id, brand, plate, number, seats })
 	}
 
 	async update(req, res) {
-		const fleet = await Fleet.findByPk(req.params.id)
+		const car = await Car.findByPk(req.params.id)
 
-		if (fleet.companyId !== req.user.companyId) {
+		if (car.companyId !== req.user.companyId) {
 			throw new Exception({ status: 404 })
 		}
 
-		const { id, brand, plate, number, seats } = await fleet.update(req.body)
+		const { id, brand, plate, number, seats } = await car.update(req.body)
 
 		return res.json({ id, brand, plate, number, seats })
 	}
@@ -49,10 +49,10 @@ class FleetController {
 	async destroy(req, res) {
 		const { id } = req.params
 		const { force } = req.body
-		await Fleet.destroy({ where: { id }, force })
+		await Car.destroy({ where: { id }, force })
 
 		return res.status(204).json()
 	}
 }
 
-export default new FleetController()
+export default new CarController()

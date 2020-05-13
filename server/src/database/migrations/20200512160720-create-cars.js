@@ -1,6 +1,6 @@
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('Fleets', {
+		return queryInterface.createTable('Cars', {
 			id: {
 				type: Sequelize.UUID,
 				defaultValue: Sequelize.UUIDV4,
@@ -47,6 +47,6 @@ module.exports = {
 	},
 
 	down: (queryInterface) => {
-		return queryInterface.dropTable('Fleets')
+		return queryInterface.dropTable('Cars')
 	},
 }

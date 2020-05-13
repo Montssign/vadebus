@@ -7,11 +7,11 @@ import User from '../app/models/User'
 import File from '../app/models/File'
 import AclRole from '../app/models/AclRole'
 import Company from '../app/models/Company'
-import Fleet from '../app/models/Fleet'
+import Car from '../app/models/Car'
 import Route from '../app/models/Route'
 import Point from '../app/models/Point'
 
-const models = [User, File, AclRole, Company, Fleet, Route, Point]
+const models = [User, File, AclRole, Company, Car, Route, Point]
 
 class Database {
 	constructor() {

@@ -8,8 +8,8 @@ import validateUserUpdate from '../app/validators/UserUpdate'
 import validateCompanyStore from '../app/validators/CompanyStore'
 import validateCollectorStore from '../app/validators/CollectorStore'
 import validateCollectorUpdate from '../app/validators/CollectorUpdate'
-import validateFleetStore from '../app/validators/FleetStore'
-import validateFleetUpdate from '../app/validators/FleetUpdate'
+import validateCarStore from '../app/validators/CarStore'
+import validateCarUpdate from '../app/validators/CarUpdate'
 import validateRouteStore from '../app/validators/RouteStore'
 import validateRouteUpdate from '../app/validators/RouteUpdate'
 import validatePointStore from '../app/validators/PointStore'
@@ -17,7 +17,7 @@ import validatePointUpdate from '../app/validators/PointUpdate'
 
 import UserController from '../app/controllers/Manager/UserController'
 import CollectorController from '../app/controllers/Manager/CollectorController'
-import FleetController from '../app/controllers/Manager/FleetController'
+import CarController from '../app/controllers/Manager/CarController'
 import RouteController from '../app/controllers/Manager/RouteController'
 import PointController from '../app/controllers/Manager/PointController'
 
@@ -49,11 +49,11 @@ routes.put(
 routes.delete('/collectors/:id', CollectorController.destroy)
 
 // Fleet
-routes.get('/fleets', FleetController.index)
-routes.post('/fleets', validateFleetStore, FleetController.store)
-routes.get('/fleets/:id', FleetController.show)
-routes.put('/fleets/:id', validateFleetUpdate, FleetController.update)
-routes.delete('/fleets/:id', FleetController.destroy)
+routes.get('/cars', CarController.index)
+routes.post('/cars', validateCarStore, CarController.store)
+routes.get('/cars/:id', CarController.show)
+routes.put('/cars/:id', validateCarUpdate, CarController.update)
+routes.delete('/cars/:id', CarController.destroy)
 
 // Routes
 routes.get('/routes', RouteController.index)
