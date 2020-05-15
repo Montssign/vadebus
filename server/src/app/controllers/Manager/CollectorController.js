@@ -6,6 +6,7 @@ import User from '../../models/User'
 import AclRole from '../../models/AclRole'
 import File from '../../models/File'
 import Exception from '../../exceptions/Exception'
+import AssociateUserToRouteService from '../../services/AssociateUserToRouteService'
 
 class CollectorController {
 	async index(req, res) {
@@ -31,14 +32,16 @@ class CollectorController {
 	}
 
 	async store(req, res) {
-		const { role } = req.body
+		const { role, routes } = req.body
+		delete req.body.routes
 
 		const user = await CreateUserService.run({
-			userData: req.body,
+			userData: { ...req.body, companyId: req.user.companyId },
 			role,
 		})
 
-		user.companyId = req.user.companyId
+		await AssociateUserToRouteService.run({ user, routes })
+
 		await user.save()
 
 		const { id, name, email, roles } = user
@@ -69,12 +72,16 @@ class CollectorController {
 	}
 
 	async update(req, res) {
+		const { routes } = req.body
+
 		const userId = req.params.id
 
 		const user = await UpdateUserService.run({
 			userData: req.body,
 			userId,
 		})
+
+		await AssociateUserToRouteService.run({ user, routes })
 
 		return res.json(user)
 	}

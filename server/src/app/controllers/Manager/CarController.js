@@ -1,5 +1,6 @@
 import Car from '../../models/Car'
 import Exception from '../../exceptions/Exception'
+import AssociateCarToRouteService from '../../services/AssociateCarToRouteService'
 
 class CarController {
 	async index(req, res) {
@@ -12,10 +13,17 @@ class CarController {
 	}
 
 	async store(req, res) {
-		const { id, brand, plate, number, seats } = await Car.create({
+		const { routes } = req.body
+		delete req.body.routes
+
+		const car = await Car.create({
 			...req.body,
 			companyId: req.user.companyId,
 		})
+
+		await AssociateCarToRouteService.run({ car, routes })
+
+		const { id, brand, plate, number, seats } = car
 
 		return res.status(201).json({ id, brand, plate, number, seats })
 	}
@@ -35,7 +43,12 @@ class CarController {
 	}
 
 	async update(req, res) {
+		const { routes } = req.body
+		delete req.body.routes
+
 		const car = await Car.findByPk(req.params.id)
+
+		await AssociateCarToRouteService.run({ car, routes })
 
 		if (car.companyId !== req.user.companyId) {
 			throw new Exception({ status: 404 })

@@ -49,6 +49,11 @@ class User extends Model {
 			foreignKey: 'companyId',
 			as: 'company',
 		})
+		this.belongsToMany(models.Route, {
+			through: 'CollectorRoute',
+			foreignKey: 'collectorId',
+			as: 'routes',
+		})
 	}
 }
 

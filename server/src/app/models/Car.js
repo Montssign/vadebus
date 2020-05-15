@@ -24,6 +24,12 @@ class Car extends Model {
 
 	static associate(models) {
 		this.belongsTo(models.Company, { foreignKey: 'companyId', as: 'company' })
+
+		this.belongsToMany(models.Route, {
+			through: 'CarRoute',
+			foreignKey: 'carId',
+			as: 'routes',
+		})
 	}
 }
 

@@ -26,6 +26,18 @@ class Route extends Model {
 			foreignKey: 'routeId',
 			as: 'points',
 		})
+
+		this.belongsToMany(models.User, {
+			through: 'CollectorRoute',
+			foreignKey: 'routeId',
+			as: 'collectors',
+		})
+
+		this.belongsToMany(models.Car, {
+			through: 'CarRoute',
+			foreignKey: 'routeId',
+			as: 'cars',
+		})
 	}
 }
 

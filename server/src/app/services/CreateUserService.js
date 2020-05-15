@@ -4,6 +4,7 @@ import AclRole from '../models/AclRole'
 import Notification from '../schemas/Notification'
 import Queue from '../../lib/Queue'
 import WelcomeMail from '../jobs/WelcomeMail'
+import AssociateUserToRoleService from './AssociateUserToRoleService'
 
 class CreateUserService {
 	async run({ userData, role }) {
@@ -18,14 +19,12 @@ class CreateUserService {
 
 		const createdUser = await User.create(userData)
 
-		const aclRole = await AclRole.findOne({ where: { name: role } })
-
-		if (!aclRole) {
+		try {
+			await AssociateUserToRoleService.run({ user: createdUser, role })
+		} catch (err) {
 			await createdUser.destroy({ force: true })
 			throw new Exception({ status: 400, message: 'Invalid role' })
 		}
-
-		await createdUser.addRole(aclRole)
 
 		const { id, name, email } = createdUser
 
