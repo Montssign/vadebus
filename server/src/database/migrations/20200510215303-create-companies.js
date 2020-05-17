@@ -12,7 +12,7 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-			companyName: {
+			fantasy: {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},

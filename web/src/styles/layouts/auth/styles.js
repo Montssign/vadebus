@@ -30,7 +30,6 @@ export const Content = styled.div`
     max-width: 315px;
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
 
     &[type='sign-up'] {
       max-width: 500px;

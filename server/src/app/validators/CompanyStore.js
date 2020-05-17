@@ -7,7 +7,7 @@ export default async (req, res, next) => {
 			company: Yup.object()
 				.shape({
 					name: Yup.string().required(),
-					companyName: Yup.string().required(),
+					fantasy: Yup.string().required(),
 					address: Yup.string().required(),
 					email: Yup.string().email(),
 					phone: Yup.string(),

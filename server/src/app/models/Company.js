@@ -10,7 +10,7 @@ class Company extends Model {
 					primaryKey: true,
 				},
 				name: Sequelize.STRING,
-				companyName: Sequelize.STRING,
+				fantasy: Sequelize.STRING,
 				address: Sequelize.TEXT,
 				email: Sequelize.STRING,
 				phone: Sequelize.STRING,

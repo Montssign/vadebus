@@ -34,14 +34,9 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const { user } = payload;
 
-    yield call(api.post, '/users', {
-      name,
-      email,
-      password,
-      provider: true,
-    });
+    yield call(api.post, '/users', user);
 
     yield put(signUpSuccess());
     history.push('/');

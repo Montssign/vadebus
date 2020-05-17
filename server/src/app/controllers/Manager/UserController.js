@@ -20,12 +20,11 @@ class UserController {
 				phone: reqCompany.phone || user.phone,
 			})
 
-			user.companyId = company.id
-			await user.save()
+			await user.update({ companyId: company.id })
 		} catch (err) {
-			user.destroy({ force: true })
+			await user.destroy({ force: true })
 
-			throw new Exception({ status: 500 })
+			throw new Exception({ status: 500, data: err })
 		}
 
 		const { id, name, email, roles } = user
