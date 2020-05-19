@@ -6,7 +6,6 @@ yarn-error.log
 # Environment
 public
 .env
-.env.test
 tmp
 
 # Tests
