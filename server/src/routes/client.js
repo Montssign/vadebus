@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import authMiddleware from '../app/middlewares/auth'
-import sessionMiddleware from '../app/middlewares/session'
+import commonsMiddleware from '../app/middlewares/commons'
 
 import validateUserStore from '../app/validators/UserStore'
 import validateUserUpdate from '../app/validators/UserUpdate'
@@ -14,9 +14,11 @@ routes.get('/', (req, res) => res.json({ message: 'Hello from Athos api' }))
 
 routes.post('/users', validateUserStore, UserController.store)
 
-routes.use(sessionMiddleware)
+routes.use(commonsMiddleware.preauth())
 
 routes.use(authMiddleware)
+
+routes.use(commonsMiddleware.postauth())
 
 routes.put('/users', validateUserUpdate, UserController.update)
 

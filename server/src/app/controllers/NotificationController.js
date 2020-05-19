@@ -2,6 +2,7 @@ import Notification from '../schemas/Notification'
 
 class NotificationController {
 	async index(req, res) {
+		console.log('opa')
 		const { page = 1, limit = 20 } = req.query
 
 		const notifications = await Notification.find({

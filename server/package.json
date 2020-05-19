@@ -20,6 +20,7 @@
 	},
 	"dependencies": {
 		"@sentry/node": "^5.15.5",
+		"axios": "^0.19.2",
 		"bcryptjs": "^2.4.3",
 		"bee-queue": "^1.2.3",
 		"cors": "^2.8.5",

@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import authMiddleware from '../app/middlewares/auth'
 import managerMiddleware from '../app/middlewares/manager'
-import sessionMiddleware from '../app/middlewares/session'
+import commonsMiddleware from '../app/middlewares/commons'
 
 import validateUserStore from '../app/validators/UserStore'
 import validateUserUpdate from '../app/validators/UserUpdate'
@@ -33,10 +33,12 @@ routes.post(
 	UserController.store
 )
 
-routes.use(sessionMiddleware)
+routes.use(commonsMiddleware.preauth())
 
 routes.use(authMiddleware)
 routes.use(managerMiddleware)
+
+routes.use(commonsMiddleware.postauth())
 
 routes.put('/users', validateUserUpdate, UserController.update)
 
