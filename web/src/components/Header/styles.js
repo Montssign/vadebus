@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 64px;
-  background: #fff;
+  background: #f8f7fd;
   padding: 0 30px;
 `;
 
 export const Content = styled.div`
   height: 64px;
-  max-width: 900px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -17,16 +16,19 @@ export const Content = styled.div`
   nav {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     img {
       margin-right: 20px;
-      padding-right: 20px;
-      border-right: 1px solid #eee;
     }
 
     a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: bold;
-      color: #7159c1;
+      font-size: 20px;
+      color: #6c8bf5;
     }
   }
 

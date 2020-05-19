@@ -1,0 +1,220 @@
+{
+  "results": [
+    {
+      "lat": -23.7122329,
+      "lng": -46.4157822,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/bus-71.png",
+      "id": "6a6a0d36f347ee28a84bbbfc8dcf60ae81ad3e55",
+      "name": "Terminal Rodoviario de Ribeirao Pires",
+      "types": [
+        "bus_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Rua Capitão José Galo, 85 - Centro, Centro - Ribeirão Pires"
+    },
+    {
+      "lat": -23.6922562,
+      "lng": -46.44867459999999,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/train-71.png",
+      "id": "6b7b5fb861f2788baf9c54b0aadd0567f8ea4503",
+      "name": "Guapituba",
+      "types": [
+        "train_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Jardim Guapituba, Mauá"
+    },
+    {
+      "lat": -23.6678529,
+      "lng": -46.45978969999999,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "9dbe67e5fdc3507360c4fa39845c06dc7e2f0b23",
+      "name": "Avenida Governador Mario Covas Júnior, 135",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6647509,
+      "lng": -46.46226559999999,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "45a5ddf9061f2eb1c4482c0a375525c38b5e5659",
+      "name": "Via Park",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Rua do Comércio, 150 - Centro, Mauá"
+    },
+    {
+      "lat": -23.624476,
+      "lng": -46.4808293,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/bus-71.png",
+      "id": "efddb910022716fee78854c6308685ed778c3ade",
+      "name": "Terminal Metropolitano Sônia Maria",
+      "types": [
+        "bus_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6210018,
+      "lng": -46.47836780000001,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "c602f2895750ec4a8d2d04487af760b133d5895a",
+      "name": "Parada Santa Adélia",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.7432937,
+      "lng": -46.3917399,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/train-71.png",
+      "id": "86e0a7872de209013f2ee23b5a2010b1a8936879",
+      "name": "Rio Grande Da Serra",
+      "types": [
+        "train_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6140593,
+      "lng": -46.5009087,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/bus-71.png",
+      "id": "3025de0cdcd141b155ae9d690bced0c8a410bb5f",
+      "name": "Terminal Sapopemba",
+      "types": [
+        "bus_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6523265,
+      "lng": -46.5282948,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/train-71.png",
+      "id": "a9afefbd991a2fa496c20568eeea77a2be78d8bf",
+      "name": "Prefeito Celso Daniel Santo André",
+      "types": [
+        "train_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Rua Itambé, 87 - Centro, Santo André"
+    },
+    {
+      "lat": -23.6527589,
+      "lng": -46.52899530000001,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/bus-71.png",
+      "id": "ab02fdf18db0c31057571ad3d351fff69b112c67",
+      "name": "Terminal Metropolitano Santo Andre Oeste",
+      "types": [
+        "bus_station",
+        "transit_station",
+        "point_of_interest",
+        "establishment"
+      ],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6998441,
+      "lng": -46.4370758,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "c72852ee3225166526cfd48869a650485bb5e59e",
+      "name": "Av. Humberto de Campos, 2327",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.7173852,
+      "lng": -46.42156579999999,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "f5fc7c870177144736de7fb5d412a3736a92cc36",
+      "name": "R. Papa João XXIII, 1-269",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.68995709999999,
+      "lng": -46.3870527,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "055698b1a99ba0c0df609c54f3cf47aaca98bd3b",
+      "name": "R. Prof. Antônio Nunes, 610",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6225955,
+      "lng": -46.448039,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "810a8873b3192dcd1a98b280e00b7b60bac44b40",
+      "name": "Estr. Do Rio Claro",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.624705,
+      "lng": -46.45822949999999,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "3a4c35557a193f08145e13bc7cd5cf8f8da901b7",
+      "name": "R. Cinira Polônio",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.621531,
+      "lng": -46.457013,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "1c0902709aa30897061e8b5bdc351763c744cf20",
+      "name": "R. Cinira Polônio",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6736285,
+      "lng": -46.43375289999999,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "5485ca4842db877d0d78c7accf35aaba44262db3",
+      "name": "Rua Caetano Aletto, 320-342",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6735428,
+      "lng": -46.433689,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "44b9ea7d269e6b8efb183127f446b8ec980f28ee",
+      "name": "Caetano Aletto, 85",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6749319,
+      "lng": -46.4335968,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "a094668a36a530628901ffc3fb30229c55db660e",
+      "name": "Rua Caetano Aletto",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    },
+    {
+      "lat": -23.6750373,
+      "lng": -46.4334623,
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+      "id": "6cf7381daf7b912457a8f1fab511bba14266e0cd",
+      "name": "Rua Caetano Aletto, 183-197",
+      "types": ["transit_station", "point_of_interest", "establishment"],
+      "vicinity": "Brazil"
+    }
+  ],
+  "status": "OK"
+}

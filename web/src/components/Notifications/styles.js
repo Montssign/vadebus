@@ -4,6 +4,10 @@ import { lighten } from 'polished';
 
 export const Container = styled.div`
   position: relative;
+
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 1px solid #eee;
 `;
 
 export const Badge = styled.button`
@@ -30,17 +34,18 @@ export const Badge = styled.button`
 export const NotificationList = styled.div`
   position: absolute;
   width: 260px;
-  left: calc(50% - 130px);
+  right: -20px;
   top: calc(100% + 30px);
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 4px;
   padding: 15px 5px;
   display: ${props => (props.visible ? 'block' : 'none')};
+  z-index: 99;
 
   &::before {
     content: '';
     position: absolute;
-    left: calc(50% - 20px);
+    right: 10px;
     top: -20px;
     width: 0;
     height: 0;

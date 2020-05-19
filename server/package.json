@@ -1,9 +1,8 @@
 {
-	"name": "athos",
-	"displayName": "Athos",
+	"name": "vadebus",
+	"displayName": "VádeBus API",
 	"version": "1.0.0",
 	"author": "Felipe D S Lima <felipe@monts.com.br>",
-	"repository": "git@github.com:Montssign/athos.git",
 	"license": "MIT",
 	"main": "index.js",
 	"scripts": {

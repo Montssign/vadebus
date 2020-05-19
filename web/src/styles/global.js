@@ -3,7 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import nunito from '~/assets/fonts/Nunito-Regular.ttf';
+
 export default createGlobalStyle`
+  @font-face {
+    font-family: 'Nunito';
+    src: url(${nunito});
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -17,6 +24,7 @@ export default createGlobalStyle`
 
   html, body, #root {
     min-height: 100vh;
+    overflow: hidden;
   }
 
   body {
@@ -24,7 +32,8 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font: 14px 'Roboto', sans-serif;
+    font: 14px 'Nunito', 'Roboto', sans-serif;
+    color: #333333;
   }
 
   a {

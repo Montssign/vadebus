@@ -20,7 +20,7 @@ export default function SignIn() {
   const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit({ email, password }) {
-    dispatch(signInRequest(email, password));
+    dispatch(signInRequest({ email, password }));
   }
 
   return (

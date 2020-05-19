@@ -7,19 +7,9 @@ import history from '~/services/history';
 
 export function* signIn({ payload }) {
   try {
-    const { email, password } = payload;
-
-    const response = yield call(api.post, '/sessions', {
-      email,
-      password,
-    });
+    const response = yield call(api.post, '/sessions', payload.user);
 
     const { token, user } = response.data;
-
-    if (!user.provider) {
-      console.tron.error('Usuário não é um prestador');
-      return;
-    }
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 

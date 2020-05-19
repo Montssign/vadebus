@@ -1,9 +1,8 @@
-export function signInRequest(email, password) {
+export function signInRequest(user) {
   return {
     type: '@auth/SIGN_IN_REQUEST',
     payload: {
-      email,
-      password,
+      user,
     },
   };
 }

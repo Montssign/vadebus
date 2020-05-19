@@ -1,9 +1,8 @@
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('Points', {
+		return queryInterface.createTable('BusStation', {
 			id: {
-				type: Sequelize.UUID,
-				defaultValue: Sequelize.UUIDV4,
+				type: Sequelize.STRING,
 				allowNull: false,
 				autoIncrement: false,
 				primaryKey: true,
@@ -12,10 +11,12 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-			index: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-				defaultValue: 0,
+			placeId: {
+				type: Sequelize.STRING,
+			},
+			types: {
+				type: Sequelize.TEXT,
+				allowNull: true,
 			},
 			lat: {
 				type: Sequelize.STRING(20),
@@ -25,9 +26,9 @@ module.exports = {
 				type: Sequelize.STRING(20),
 				allowNull: false,
 			},
-			routeId: {
+			cityScannedId: {
 				type: Sequelize.UUID,
-				references: { model: 'Routes', key: 'id' },
+				references: { model: 'CityScanned', key: 'id' },
 				onDelete: 'CASCADE',
 				onUpdate: 'CASCADE',
 				allowNull: false,
@@ -44,6 +45,6 @@ module.exports = {
 	},
 
 	down: (queryInterface) => {
-		return queryInterface.dropTable('Points')
+		return queryInterface.dropTable('BusStation')
 	},
 }
