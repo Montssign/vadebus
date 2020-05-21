@@ -21,6 +21,7 @@ import CollectorController from '../app/controllers/Manager/CollectorController'
 import CarController from '../app/controllers/Manager/CarController'
 import RouteController from '../app/controllers/Manager/RouteController'
 import PointController from '../app/controllers/Manager/PointController'
+import BusStationController from '../app/controllers/Manager/BusStationController'
 
 const routes = Router()
 
@@ -73,5 +74,7 @@ routes.post('/points', validatePointStore, PointController.store)
 routes.get('/points/:id', PointController.show)
 routes.put('/points/:id', validatePointUpdate, PointController.update)
 routes.delete('/points/:id', PointController.destroy)
+
+routes.get('/bus-stations', BusStationController.index)
 
 export default routes

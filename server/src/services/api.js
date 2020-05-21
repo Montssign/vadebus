@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const api = axios.create({
-	baseURL: 'https://maps.googleapis.com/maps/api/place/textsearch/',
+export const googleApi = axios.create({
+	baseURL: 'https://maps.googleapis.com/maps/api',
 })
-
-export default api

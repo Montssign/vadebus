@@ -22,6 +22,6 @@ export const RealPanel = styled.div`
   border-radius: 4px;
   background: #f8f7fd;
   padding: 16px;
-  margin: 8px;
+  margin: 8px ${props => props.gap}px;
   transition: 0.2s;
 `;

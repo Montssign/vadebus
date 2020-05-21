@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
@@ -10,18 +10,28 @@ import Routes from './routes';
 import history from './services/history';
 
 import { store, persistor } from './store';
+import ModalContext from '~/components/Modal/modalContext';
 
 import GlobalStyle from './styles/global';
+import Modal from './components/Modal';
 
 function App() {
+  const [active, setActive] = useState(false);
+  const [Content, setContent] = useState(<></>);
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router history={history}>
-          <Routes />
-          <GlobalStyle />
-          <ToastContainer autoClose={3000} />
-        </Router>
+        <ModalContext.Provider
+          value={{ active, setActive, Content, setContent }}
+        >
+          <Router history={history}>
+            <Routes />
+            <Modal />
+            <GlobalStyle />
+            <ToastContainer autoClose={3000} />
+          </Router>
+        </ModalContext.Provider>
       </PersistGate>
     </Provider>
   );

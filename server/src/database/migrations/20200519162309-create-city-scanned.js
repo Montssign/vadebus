@@ -1,6 +1,6 @@
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('CityScanned', {
+		return queryInterface.createTable('CityScanneds', {
 			id: {
 				type: Sequelize.UUID,
 				defaultValue: Sequelize.UUIDV4,
@@ -11,6 +11,21 @@ module.exports = {
 			cityQuery: {
 				type: Sequelize.STRING,
 				allowNull: false,
+			},
+			lat: {
+				type: Sequelize.STRING(20),
+				allowNull: false,
+			},
+			lng: {
+				type: Sequelize.STRING(20),
+				allowNull: false,
+			},
+			createdById: {
+				type: Sequelize.UUID,
+				allowNull: true,
+				references: { model: 'Users', key: 'id' },
+				onDelete: 'SET NULL',
+				onUpdate: 'CASCADE',
 			},
 			createdAt: {
 				type: Sequelize.DATE,

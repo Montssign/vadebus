@@ -16,6 +16,8 @@ class Company extends Model {
 				phone: Sequelize.STRING,
 				cnpj: Sequelize.STRING(14),
 				active: Sequelize.BOOLEAN,
+				lastSearchCity: Sequelize.STRING,
+				lastSearchState: Sequelize.STRING,
 			},
 			{
 				sequelize,

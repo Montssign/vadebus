@@ -24,6 +24,7 @@ module.exports = {
     'no-unused-vars': ['error', {argsIgnorePattern: 'next'}],
 		'semi': ['error', 'never'],
 		'no-plusplus': 'off',
+		'import/prefer-default-export': 'off'
 	},
 	overrides: [
     {

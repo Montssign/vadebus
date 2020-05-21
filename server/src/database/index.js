@@ -10,8 +10,20 @@ import Company from '../app/models/Company'
 import Car from '../app/models/Car'
 import Route from '../app/models/Route'
 import Point from '../app/models/Point'
+import CityScanned from '../app/models/CityScanned'
+import BusStation from '../app/models/BusStation'
 
-const models = [User, File, AclRole, Company, Car, Route, Point]
+const models = [
+	User,
+	File,
+	AclRole,
+	Company,
+	Car,
+	Route,
+	Point,
+	CityScanned,
+	BusStation,
+]
 
 class Database {
 	constructor() {

@@ -1,6 +1,6 @@
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('BusStation', {
+		return queryInterface.createTable('BusStations', {
 			id: {
 				type: Sequelize.STRING,
 				allowNull: false,
@@ -28,7 +28,7 @@ module.exports = {
 			},
 			cityScannedId: {
 				type: Sequelize.UUID,
-				references: { model: 'CityScanned', key: 'id' },
+				references: { model: 'CityScanneds', key: 'id' },
 				onDelete: 'CASCADE',
 				onUpdate: 'CASCADE',
 				allowNull: false,

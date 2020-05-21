@@ -109,7 +109,7 @@ function Dashboard() {
     <Body>
       <Title>Dashboard</Title>
       <Row>
-        <Panel weight={1}>
+        <Panel weight={1} gap={8}>
           <Container>
             <h3>Passageiros</h3>
             <div>
@@ -121,7 +121,7 @@ function Dashboard() {
             </div>
           </Container>
         </Panel>
-        <Panel weight={1}>
+        <Panel weight={1} gap={8}>
           <Container>
             <h3>Método de pagamento</h3>
             <div>
@@ -133,7 +133,7 @@ function Dashboard() {
             </div>
           </Container>
         </Panel>
-        <Panel weight={1}>
+        <Panel weight={1} gap={8}>
           <Container>
             <h3>Novos Passageiros</h3>
             <div>
@@ -147,7 +147,7 @@ function Dashboard() {
         </Panel>
       </Row>
       <Row>
-        <Panel weight={2}>
+        <Panel weight={2} gap={8}>
           <Container>
             <h3>Passageiros por Região</h3>
             <Display>
@@ -155,7 +155,7 @@ function Dashboard() {
             </Display>
           </Container>
         </Panel>
-        <Panel weight={1}>
+        <Panel weight={1} gap={8}>
           <Container>
             <h3>Passageiros por linha</h3>
             <div>

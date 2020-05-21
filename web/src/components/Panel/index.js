@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import { Container, RealPanel } from './styles';
 
-function Panel({ children, weight }) {
+function Panel({ children, weight, gap }) {
   return (
     <Container weight={weight}>
-      <RealPanel>{children}</RealPanel>
+      <RealPanel gap={gap}>{children}</RealPanel>
     </Container>
   );
 }
@@ -18,6 +18,11 @@ Panel.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
   weight: PropTypes.number.isRequired,
+  gap: PropTypes.number,
+};
+
+Panel.defaultProps = {
+  gap: 0,
 };
 
 export default Panel;

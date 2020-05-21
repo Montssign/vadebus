@@ -57,7 +57,7 @@ function RoutePanel({ data }) {
           <h4>
             <strong>Final:</strong> {stops[stops.length - 1].name}
           </h4>
-          <h4>Tempo total: {data.estimatedTime}</h4>
+          <h4>Tempo total: {Math.ceil(data.estimatedTime / 60)} Min.</h4>
           <section className="options-buttons">
             <button type="button">
               <MdEdit color="#048DDB" size={24} />
