@@ -1,6 +1,6 @@
 import { googleApi } from '../../../services/api'
 import CityScanned from '../../models/CityScanned'
-import Sleep from '../../../lib/Sleep'
+import { sleep } from '../../../lib/Utils'
 import BusStation from '../../models/BusStation'
 import Company from '../../models/Company'
 
@@ -30,7 +30,7 @@ class BusStationController {
 			allPlaces.splice(allPlaces.length, 0, ...getResults.data.results)
 
 			if (getResults.data.next_page_token) {
-				await Sleep(3000)
+				await sleep(3000)
 				await getAllPages(getResults.data.next_page_token)
 			}
 		}

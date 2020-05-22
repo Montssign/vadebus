@@ -33,7 +33,7 @@ export default function Header() {
               <img
                 src={
                   (profile.avatar && profile.avatar.url) ||
-                  'https://api.adorable.io/avatars/50/abott@adorable.png'
+                  `https://api.adorable.io/avatars/50/${profile.email}.png`
                 }
                 alt={profile.name}
               />

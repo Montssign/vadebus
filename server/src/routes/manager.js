@@ -1,4 +1,7 @@
 import { Router } from 'express'
+import multer from 'multer'
+
+import multerConfg from '../configs/multer'
 
 import authMiddleware from '../app/middlewares/auth'
 import managerMiddleware from '../app/middlewares/manager'
@@ -22,8 +25,10 @@ import CarController from '../app/controllers/Manager/CarController'
 import RouteController from '../app/controllers/Manager/RouteController'
 import PointController from '../app/controllers/Manager/PointController'
 import BusStationController from '../app/controllers/Manager/BusStationController'
+import FileController from '../app/controllers/FileController'
 
 const routes = Router()
+const upload = multer(multerConfg)
 
 routes.get('/', (req, res) => res.json({ message: 'Hello from Athos api' }))
 
@@ -76,5 +81,8 @@ routes.put('/points/:id', validatePointUpdate, PointController.update)
 routes.delete('/points/:id', PointController.destroy)
 
 routes.get('/bus-stations', BusStationController.index)
+
+routes.get('/files', FileController.index)
+routes.post('/files', upload.array('file', 5), FileController.store)
 
 export default routes

@@ -4,6 +4,7 @@ import { promisify } from 'util'
 import authConfig from '../../configs/auth'
 import User from '../models/User'
 import AclRole from '../models/AclRole'
+import Exception from '../exceptions/Exception'
 
 export default async (req, res, next) => {
 	const authHeader = req.headers.authorization
@@ -36,6 +37,10 @@ export default async (req, res, next) => {
 				},
 			],
 		})
+
+		if (!user) {
+			throw new Exception({ status: 404 })
+		}
 
 		req.user = user
 

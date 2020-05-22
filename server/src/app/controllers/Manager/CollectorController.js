@@ -11,7 +11,7 @@ import AssociateUserToRouteService from '../../services/AssociateUserToRouteServ
 class CollectorController {
 	async index(req, res) {
 		const collectors = await User.findAll({
-			attributes: ['id', 'name'],
+			attributes: ['id', 'name', 'email', 'phone'],
 			include: [
 				{
 					model: AclRole,
@@ -32,15 +32,13 @@ class CollectorController {
 	}
 
 	async store(req, res) {
-		const { role, routes } = req.body
+		const { role } = req.body
 		delete req.body.routes
 
 		const user = await CreateUserService.run({
 			userData: { ...req.body, companyId: req.user.companyId },
 			role,
 		})
-
-		await AssociateUserToRouteService.run({ user, routes })
 
 		await user.save()
 

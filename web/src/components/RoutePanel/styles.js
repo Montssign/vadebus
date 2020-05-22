@@ -152,6 +152,7 @@ export const NodeItem = styled.section`
     font-size: 14px;
     font-weight: normal;
     max-width: 60px;
+    white-space: nowrap;
   }
 
   ${Circle} {

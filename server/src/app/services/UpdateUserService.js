@@ -1,6 +1,7 @@
 import User from '../models/User'
 import Exception from '../exceptions/Exception'
 import AclRole from '../models/AclRole'
+import File from '../models/File'
 
 class CreateUserService {
 	async run({ userData, userId }) {
@@ -34,9 +35,9 @@ class CreateUserService {
 			await user.update({ password })
 		}
 
-		const { id, name } = await user.update(userData)
+		const { id, name, cpfOrCnpj, phone } = await user.update(userData)
 
-		const { roles } = await User.findByPk(id, {
+		const { roles, avatar } = await User.findByPk(id, {
 			attributes: ['id'],
 			include: [
 				{
@@ -45,10 +46,23 @@ class CreateUserService {
 					attributes: ['name'],
 					through: { attributes: [] },
 				},
+				{
+					model: File,
+					as: 'avatar',
+					attributes: ['id', 'path', 'url'],
+				},
 			],
 		})
 
-		return { id, name, email: email || user.email, roles }
+		return {
+			id,
+			name,
+			cpfOrCnpj,
+			email: email || user.email,
+			roles,
+			avatar,
+			phone,
+		}
 	}
 }
 

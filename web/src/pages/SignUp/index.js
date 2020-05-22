@@ -6,6 +6,7 @@ import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import jsonp from 'jsonp';
 import logo from '~/assets/images/logo.svg';
+import { sanitizeNumber, maskValues } from '~/utils';
 
 import { signUpRequest } from '~/store/modules/auth/actions';
 
@@ -39,18 +40,6 @@ export default function SignUp() {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
-  function sanitizeCNPJ(value) {
-    const testMath = value.match(/\d+/g) || [];
-
-    return testMath.join('');
-  }
-
-  function sanitizeNumber(value) {
-    const testMath = value.match(/\d+/g) || [];
-
-    return testMath.join('');
-  }
-
   function handleSubmit() {
     dispatch(
       signUpRequest({
@@ -59,7 +48,7 @@ export default function SignUp() {
         phone,
         password,
         company: {
-          cnpj: sanitizeCNPJ(cnpj),
+          cnpj: sanitizeNumber(cnpj),
           name: companyName,
           fantasy,
           address: JSON.stringify({
@@ -78,7 +67,7 @@ export default function SignUp() {
   }
 
   useEffect(() => {
-    const CNPJ = sanitizeCNPJ(cnpj);
+    const CNPJ = sanitizeNumber(cnpj);
     async function test() {
       jsonp(
         `https://www.receitaws.com.br/v1/cnpj/${CNPJ}`,
@@ -106,27 +95,20 @@ export default function SignUp() {
   }, [cnpj]);
 
   function cnpjMask(value) {
-    value = sanitizeCNPJ(value);
-    value = value.replace(
-      /(\d{2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/g,
-      '$1.$2.$3/$4-$5'
-    );
-
-    value = value.replace(/(\.\.\/-)|(\.\/-)|(\/-)|(-)$/g, '');
-
-    return value;
+    value = sanitizeNumber(value);
+    if (value.length > 14) return cnpj;
+    return maskValues(value, '99.999.999/9999-99');
   }
 
-  function numberMask(value) {
+  function phoneMask(value) {
     value = sanitizeNumber(value);
-    if (value.length <= 10) {
-      value = value.replace(/(\d{2})(\d{0,4})(\d{0,4})/g, '($1)$2-$3');
-    } else {
-      value = value.replace(/(\d{2})(\d{0,5})(\d{0,4})/g, '($1)$2-$3');
-    }
-    value = value.replace(/(\)-)|(-)$/g, '');
+    if (value.length <= 10) return maskValues(value, '(99) 9999-9999');
+    return maskValues(value, '(99) 99999-9999');
+  }
 
-    return value;
+  function cepMask(value) {
+    value = sanitizeNumber(value);
+    return maskValues(value, '99999-999');
   }
 
   return (
@@ -175,7 +157,7 @@ export default function SignUp() {
               value={cep}
               type="text"
               autoComplete="cep"
-              onChange={e => setCep(e.target.value)}
+              onChange={e => setCep(cepMask(e.target.value))}
               placeholder="CEP"
             />
             <Input
@@ -268,7 +250,7 @@ export default function SignUp() {
             value={phone}
             type="text"
             autoComplete="phone"
-            onChange={e => setPhone(numberMask(e.target.value))}
+            onChange={e => setPhone(phoneMask(e.target.value))}
             placeholder="Seu telefone ou celular"
           />
           <Input

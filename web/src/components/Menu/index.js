@@ -25,8 +25,8 @@ function Menu() {
         Frota
       </Link>
       <Link
-        active={String(location['crobradores-e-motoristas'])}
-        to="/crobradores-e-motoristas"
+        active={String(location['cobradores-e-motoristas'])}
+        to="/cobradores-e-motoristas"
       >
         Cobradores e Motoristas
       </Link>

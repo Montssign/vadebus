@@ -4,6 +4,7 @@ import User from '../models/User'
 import authConfig from '../../configs/auth'
 import Exception from '../exceptions/Exception'
 import AclRole from '../models/AclRole'
+import File from '../models/File'
 
 class SessionController {
 	async store(req, res) {
@@ -17,6 +18,11 @@ class SessionController {
 					as: 'roles',
 					attributes: ['name'],
 					through: { attributes: [] },
+				},
+				{
+					model: File,
+					as: 'avatar',
+					attributes: ['id', 'path', 'url'],
 				},
 			],
 		})
@@ -35,14 +41,16 @@ class SessionController {
 			})
 		}
 
-		const { id, name, roles } = user
+		const { id, name, phone, avatar, roles } = user
 
 		return res.status(201).json({
 			user: {
 				id,
 				name,
 				email,
+				phone,
 				roles,
+				avatar,
 			},
 			token: jwt.sign({ id }, authConfig.secret, {
 				expiresIn: authConfig.expiresIn,

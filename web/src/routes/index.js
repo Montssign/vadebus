@@ -9,6 +9,8 @@ import BusRoutes from '~/pages/BusRoutes';
 import FormBusRoutes from '~/pages/FormBusRoutes';
 import Fleet from '~/pages/Fleet';
 import Collectors from '~/pages/Collectors';
+import FormCollectors from '~/pages/FormCollectors';
+import Profile from '~/pages/Profile';
 
 export default function Routes() {
   return (
@@ -17,12 +19,24 @@ export default function Routes() {
       <Route path="/register" component={SignUp} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
+
+      <Route path="/profile" component={Profile} isPrivate />
+
       <Route path="/rotas" exact component={BusRoutes} isPrivate />
       <Route path="/rotas/add" component={FormBusRoutes} isPrivate />
-      <Route path="/frota" component={Fleet} isPrivate />
+
+      <Route path="/frota" exact component={Fleet} isPrivate />
+      <Route path="/frota/add" component={Fleet} isPrivate />
+
       <Route
-        path="/crobradores-e-motoristas"
+        path="/cobradores-e-motoristas"
+        exact
         component={Collectors}
+        isPrivate
+      />
+      <Route
+        path="/cobradores-e-motoristas/add"
+        component={FormCollectors}
         isPrivate
       />
     </Switch>
