@@ -1,13 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
+import modalContext from '../Modal/modalContext';
 import Row from '../Row';
 import Panel from '../Panel';
 
 import { TitleContainer } from './styles';
+import ModalDeleteCollector from './ModalDeleteCollector';
 
 function CollectorPanel({ data }) {
+  const modal = useContext(modalContext);
   const roles = useMemo(() => {
     return data.roles
       .map(role => role.name)
@@ -15,6 +18,11 @@ function CollectorPanel({ data }) {
       .replace(/driver/g, 'Motorista')
       .replace(/collector/g, 'Cobrador');
   }, [data]);
+
+  function openModal() {
+    modal.setContent(() => <ModalDeleteCollector collector={data} />);
+    modal.setActive(true);
+  }
 
   return (
     <Row>
@@ -37,7 +45,7 @@ function CollectorPanel({ data }) {
             <button type="button">
               <MdEdit color="#048DDB" size={24} />
             </button>
-            <button type="button">
+            <button type="button" onClick={openModal}>
               <MdDelete color="#FF2020" size={24} />
             </button>
           </section>

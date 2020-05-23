@@ -7,10 +7,11 @@ import SignUp from '~/pages/SignUp';
 import Dashboard from '~/pages/Dashboard';
 import BusRoutes from '~/pages/BusRoutes';
 import FormBusRoutes from '~/pages/FormBusRoutes';
-import Fleet from '~/pages/Fleet';
+import Cars from '~/pages/Cars';
 import Collectors from '~/pages/Collectors';
 import FormCollectors from '~/pages/FormCollectors';
 import Profile from '~/pages/Profile';
+import FormCars from '~/pages/FormCars';
 
 export default function Routes() {
   return (
@@ -25,8 +26,8 @@ export default function Routes() {
       <Route path="/rotas" exact component={BusRoutes} isPrivate />
       <Route path="/rotas/add" component={FormBusRoutes} isPrivate />
 
-      <Route path="/frota" exact component={Fleet} isPrivate />
-      <Route path="/frota/add" component={Fleet} isPrivate />
+      <Route path="/frota" exact component={Cars} isPrivate />
+      <Route path="/frota/add" component={FormCars} isPrivate />
 
       <Route
         path="/cobradores-e-motoristas"

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
-function Maps({ children, google, height }) {
+function Maps({ children, google, height, location, ...rest }) {
   const containerStyle = {
     position: 'relative',
     height,
@@ -10,9 +10,10 @@ function Maps({ children, google, height }) {
 
   return (
     <Map
+      {...rest}
       containerStyle={containerStyle}
       google={google}
-      initialCenter={{ lat: -23.6655683, lng: -46.4550519 }}
+      initialCenter={location}
       zoom={14}
     >
       {children}
@@ -30,11 +31,16 @@ Maps.propTypes = {
     apiKey: PropTypes.string,
   }).isRequired,
   height: PropTypes.number,
+  location: PropTypes.shape({
+    lng: PropTypes.string,
+    lat: PropTypes.string,
+  }),
 };
 
 Maps.defaultProps = {
   children: <></>,
   height: 250,
+  location: { lng: 0, lat: 0 },
 };
 
 export default GoogleApiWrapper({

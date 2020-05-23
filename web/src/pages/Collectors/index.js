@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Body from '~/components/Body';
 import Row from '~/components/Row';
 
-import { Title } from './styles';
+import { Title, NoDataMessage } from './styles';
 import AddButton from '~/components/AddButton';
 import CollectorPanel from '~/components/CollectorPanel';
 import api from '~/services/api';
+import modalContext from '../../components/Modal/modalContext';
 
 function Collectors() {
+  const modal = useContext(modalContext);
   const [collectors, setCollectors] = useState([]);
 
   useEffect(() => {
@@ -17,7 +19,7 @@ function Collectors() {
     }
 
     getCollectors();
-  });
+  }, [modal.active]);
 
   return (
     <Body>
@@ -31,6 +33,11 @@ function Collectors() {
         {collectors.map(collecor => (
           <CollectorPanel data={collecor} key={collecor.id} />
         ))}
+        {collectors.length === 0 && (
+          <NoDataMessage>
+            Não há nenhum motorista ou cobrador cadastrado, tente adicionar um
+          </NoDataMessage>
+        )}
       </>
     </Body>
   );

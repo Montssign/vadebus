@@ -17,4 +17,9 @@ export const Container = styled.div`
 export const Display = styled.div`
   height: 250px;
   width: 100%;
+
+  h4 {
+    text-align: center;
+    margin-top: 100px;
+  }
 `;

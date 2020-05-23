@@ -6,4 +6,9 @@ export const Title = styled.h2`
   margin: 16px;
 `;
 
-export const Container = styled.div``;
+export const NoDataMessage = styled.h3`
+  color: #f8f7fd;
+  margin-top: 48px;
+  font-size: 32px;
+  text-align: center;
+`;

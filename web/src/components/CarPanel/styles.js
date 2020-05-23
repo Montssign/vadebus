@@ -84,6 +84,7 @@ export const TitleContainer = styled.div`
     }
   }
 `;
+
 export const ModalContent = styled.section`
   margin-top: 16px;
   font-size: 20px;

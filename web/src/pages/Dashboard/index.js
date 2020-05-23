@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Doughnut, Line, Bar } from 'react-chartjs-2';
 
 import Body from '~/components/Body';
@@ -7,13 +7,38 @@ import Panel from '~/components/Panel';
 
 import { Title, Container, Display } from './styles';
 import Maps from '~/components/Maps';
+import api from '~/services/api';
 
 function Dashboard() {
+  const [location, setLocation] = useState({});
+
+  useEffect(() => {
+    async function getCompany() {
+      const { data } = await api.get('/companies');
+
+      const {
+        lastSearchCity,
+        lastSearchState,
+        locationLat,
+        locationLng,
+      } = data;
+
+      setLocation({
+        lastSearchCity,
+        lastSearchState,
+        lat: locationLat,
+        lng: locationLng,
+      });
+    }
+
+    getCompany();
+  }, []);
+
   const passengersData = useMemo(
     () => ({
       datasets: [
         {
-          data: [350, 212, 30],
+          data: [0, 0, 0],
           backgroundColor: [
             'rgba(54, 162, 235, 1)',
             'rgba(75, 192, 192, 1)',
@@ -32,7 +57,7 @@ function Dashboard() {
     () => ({
       datasets: [
         {
-          data: [112, 100, 30, 350],
+          data: [0, 0, 0, 0],
           backgroundColor: [
             'rgba(255, 159, 64,1)',
             'rgba(75, 192, 192, 1)',
@@ -52,26 +77,26 @@ function Dashboard() {
     () => ({
       datasets: [
         {
-          data: [14, 20, 30, 22],
+          data: [0, 0, 0, 0],
           label: 'Bilhete Único',
           backgroundColor: ['rgba(255, 159, 64,0)'],
           borderColor: ['rgba(255, 159, 64,1)'],
         },
         {
-          data: [20, 13, 16, 25],
+          data: [0, 0, 0, 0],
           label: 'BOM',
           backgroundColor: ['rgba(75, 192, 192, 0)'],
           borderColor: ['rgba(75, 192, 192, 1)'],
         },
         {
-          data: [70, 40, 35, 8],
+          data: [0, 0, 0, 0],
           label: 'Dinheiro',
 
           backgroundColor: ['rgba(255, 99, 132, 0)'],
           borderColor: ['rgba(255, 99, 132, 1)'],
         },
         {
-          data: [22, 50, 90, 150],
+          data: [0, 0, 0, 0],
           label: 'Online',
 
           backgroundColor: ['rgba(54, 162, 235, 0)'],
@@ -89,7 +114,7 @@ function Dashboard() {
       datasets: [
         {
           label: 'Usuários',
-          data: [112, 100, 30, 120],
+          data: [0, 0, 0, 0],
           backgroundColor: [
             'rgba(54, 162, 235, 1)',
             'rgba(75, 192, 192, 1)',
@@ -151,7 +176,10 @@ function Dashboard() {
           <Container>
             <h3>Passageiros por Região</h3>
             <Display>
-              <Maps />
+              {location.lastSearchCity && <Maps location={location} />}
+              {!location.lastSearchCity && (
+                <h4>Por favor, cadastre uma rota para poder liberar o mapa</h4>
+              )}
             </Display>
           </Container>
         </Panel>

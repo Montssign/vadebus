@@ -1,11 +1,11 @@
 export function sanitizeNumber(value = '') {
-  const testMath = value.match(/\d+/g) || [];
+  const testMath = value.match(/\w+/g) || [];
 
   return testMath.join('');
 }
 
 export function maskValues(value = '', mask = '') {
-  const numbers = mask.match(/\d+/g);
+  const numbers = mask.match(/\w+/g);
   let reg = '';
 
   value =
@@ -15,13 +15,13 @@ export function maskValues(value = '', mask = '') {
 
   for (let i = 0; i < numbers.length; i++) {
     mask = mask.replace(new RegExp(numbers[i]), `$${i + 1}`);
-    reg += `(\\d{0,${numbers[i].length}})`;
+    reg += `(\\w{0,${numbers[i].length}})`;
   }
 
   reg = new RegExp(reg, 'g');
 
   value = value.replace(reg, mask);
-  value = value.replace(/\D{1,}$/g, '');
+  value = value.replace(/\W{1,}$/g, '');
 
   return value;
 }
