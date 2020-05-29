@@ -18,7 +18,11 @@ import sentryConfig from './configs/sentry'
 import redisConfig from './configs/redis'
 import Exception from './app/exceptions/Exception'
 
-const whiteList = [process.env.ORIGIN_URL]
+const whiteList = [
+	process.env.ORIGIN_URL,
+	'https://vadebus.com',
+	'http://vadebus.com',
+]
 const corsOptions = {
 	origin(origin, callback) {
 		if (whiteList.indexOf(origin) !== -1) {
