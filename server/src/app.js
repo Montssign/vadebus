@@ -26,13 +26,14 @@ const whiteList = [
 	'http://www.vadebus.com',
 ]
 const corsOptions = {
-	origin(origin, callback) {
-		if (whiteList.findIndex(origin) >= 0) {
-			callback(null, true)
-		} else {
-			callback(new Error('Not allowed by CORS'))
-		}
-	},
+	// origin(origin, callback) {
+	// 	if (whiteList.findIndex(origin) >= 0) {
+	// 		callback(null, true)
+	// 	} else {
+	// 		callback(new Error('Not allowed by CORS'))
+	// 	}
+	// },
+	origin: [],
 }
 
 class App {
@@ -61,7 +62,7 @@ class App {
 			this.server.use(cors())
 		} else {
 			this.server.use(helmet())
-			this.server.use(cors(corsOptions))
+			this.server.use(cors())
 			this.server.use(
 				new RateLimit({
 					store: new RateLimitRedis({
