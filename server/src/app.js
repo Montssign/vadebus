@@ -21,7 +21,9 @@ import Exception from './app/exceptions/Exception'
 const whiteList = [
 	process.env.ORIGIN_URL,
 	'https://vadebus.com',
+	'https://www.vadebus.com',
 	'http://vadebus.com',
+	'http://www.vadebus.com',
 ]
 const corsOptions = {
 	origin(origin, callback) {
