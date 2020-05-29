@@ -100,12 +100,13 @@ class App {
 	exceptionHandler() {
 		this.server.use(async (err, req, res, next) => {
 			const status = err.status || 500
+			const errors = await new Youch(err, req).toJSON()
+			errors.data = err.data || []
+			console.error(errors)
 			if (
 				process.env.NODE_ENV === 'development' ||
 				process.env.NODE_ENV === 'test'
 			) {
-				const errors = await new Youch(err, req).toJSON()
-				errors.data = err.data || []
 				return res.status(status).json(errors)
 			}
 
