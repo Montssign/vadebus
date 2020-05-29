@@ -1,10 +1,19 @@
 import Route from '../../models/Route'
+import Point from '../../models/Point'
 
 class RouteController {
 	async index(req, res) {
 		const routes = await Route.findAll({
 			where: { companyId: req.user.companyId },
 			attributes: ['id', 'name', 'estimatedTime'],
+			include: [
+				{
+					model: Point,
+					as: 'points',
+					attributes: ['id', 'name', 'index', 'lat', 'lng'],
+					order: [['index', 'ASC']],
+				},
+			],
 		})
 
 		return res.json(routes)
@@ -16,7 +25,27 @@ class RouteController {
 			companyId: req.user.companyId,
 		})
 
-		return res.status(201).json({ id, name, estimatedTime })
+		const { points } = req.body
+		if (points) {
+			await Promise.all(
+				points.map(async (point, index) => {
+					delete point.id
+
+					const findPoint = await Point.findOne({
+						where: { lng: point.lng, lat: point.lat },
+					})
+
+					if (findPoint) {
+						return findPoint.update({ index })
+					}
+
+					return Point.create({ ...point, index, routeId: id })
+				})
+			)
+		}
+
+		const allPoints = await Point.findAll({ where: { routeId: id } })
+		return res.status(201).json({ id, name, estimatedTime, points: allPoints })
 	}
 
 	async show(req, res) {
@@ -32,7 +61,28 @@ class RouteController {
 
 		const { id, name, estimatedTime } = await route.update(req.body)
 
-		return res.json({ id, name, estimatedTime })
+		const { points } = req.body
+		if (points) {
+			await Promise.all(
+				points.map(async (point, index) => {
+					delete point.id
+
+					const findPoint = await Point.findOne({
+						where: { lng: point.lng, lat: point.lat },
+					})
+
+					if (findPoint) {
+						return findPoint.update({ index })
+					}
+
+					return Point.create({ ...point, index, routeId: id })
+				})
+			)
+		}
+
+		const allPoints = await Point.findAll({ where: { routeId: id } })
+
+		return res.json({ id, name, estimatedTime, points: allPoints })
 	}
 
 	async destroy(req, res) {

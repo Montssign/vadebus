@@ -28,19 +28,21 @@ function CollectorPanel({ data }) {
     <Row>
       <Panel weight={1}>
         <TitleContainer>
-          <div className="collector-profile">
-            <img
-              src={
-                (data.avatar && data.avatar.url) ||
-                `https://api.adorable.io/avatars/50/${data.email}.png`
-              }
-              alt={data.name}
-            />
-            <h3>{data.name}</h3>
-          </div>
-          <h4>
-            <strong>Cargo:</strong> {roles}
-          </h4>
+          <section>
+            <div className="collector-profile">
+              <img
+                src={
+                  (data.avatar && data.avatar.url) ||
+                  `https://api.adorable.io/avatars/50/${data.email}.png`
+                }
+                alt={data.name}
+              />
+              <h3>{data.name}</h3>
+            </div>
+            <h4>
+              <strong>Cargo:</strong> {roles}
+            </h4>
+          </section>
           <section className="options-buttons">
             <button type="button">
               <MdEdit color="#048DDB" size={24} />

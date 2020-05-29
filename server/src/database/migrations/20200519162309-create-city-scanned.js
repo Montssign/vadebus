@@ -12,14 +12,6 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-			lat: {
-				type: Sequelize.STRING(20),
-				allowNull: false,
-			},
-			lng: {
-				type: Sequelize.STRING(20),
-				allowNull: false,
-			},
 			createdById: {
 				type: Sequelize.UUID,
 				allowNull: true,

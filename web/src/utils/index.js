@@ -1,5 +1,5 @@
 export function sanitizeNumber(value = '') {
-  const testMath = value.match(/\w+/g) || [];
+  const testMath = value.match(/\d+/g) || [];
 
   return testMath.join('');
 }

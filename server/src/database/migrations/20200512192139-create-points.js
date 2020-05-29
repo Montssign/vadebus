@@ -10,7 +10,7 @@ module.exports = {
 			},
 			name: {
 				type: Sequelize.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 			index: {
 				type: Sequelize.INTEGER,
@@ -18,12 +18,17 @@ module.exports = {
 				defaultValue: 0,
 			},
 			lat: {
-				type: Sequelize.STRING(20),
+				type: Sequelize.DOUBLE,
 				allowNull: false,
 			},
 			lng: {
-				type: Sequelize.STRING(20),
+				type: Sequelize.DOUBLE,
 				allowNull: false,
+			},
+			isStop: {
+				type: Sequelize.BOOLEAN,
+				allowNull: false,
+				defaultValue: false,
 			},
 			routeId: {
 				type: Sequelize.UUID,

@@ -11,8 +11,8 @@ class Point extends Model {
 				},
 				name: Sequelize.STRING,
 				index: Sequelize.INTEGER,
-				latitude: Sequelize.STRING(20),
-				longitude: Sequelize.STRING(20),
+				lat: Sequelize.DOUBLE,
+				lng: Sequelize.DOUBLE,
 			},
 			{
 				sequelize,

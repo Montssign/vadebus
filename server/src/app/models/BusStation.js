@@ -12,28 +12,13 @@ class BusStation extends Model {
 				name: Sequelize.STRING,
 				placeId: Sequelize.STRING,
 				types: Sequelize.TEXT,
-				placeTypes: Sequelize.VIRTUAL,
-				lat: Sequelize.STRING(20),
-				lng: Sequelize.STRING(20),
+				lat: Sequelize.DOUBLE,
+				lng: Sequelize.DOUBLE,
 			},
 			{
 				sequelize,
 			}
 		)
-
-		this.addHook('beforeSave', (station) => {
-			if (station) {
-				if (typeof station.placeTypes === 'object') {
-					station.types = JSON.stringify(station.placeTypes)
-				}
-			}
-		})
-
-		this.addHook('afterFind', (station) => {
-			if (station) {
-				station.placeTypes = JSON.parse(station.types || [])
-			}
-		})
 
 		return this
 	}

@@ -7,6 +7,58 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
+  margin-bottom: 40px;
+
+  .seats-section {
+    position: relative;
+
+    > p {
+      position: absolute;
+      top: 10px;
+      left: ${props =>
+        (props.seats !== null ? props.seats.length : 0) * 8 + 24}px;
+      color: #f8f7fd;
+      pointer-events: none;
+    }
+  }
+
+  .routes-section {
+    .routes-pills {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #f8f7fd;
+      height: 40px;
+      border-radius: 4px;
+      width: 100%;
+      margin: 0 0 10px;
+      padding: 0 15px;
+      background-color: rgba(0, 0, 0, 0.4);
+
+      button.routes-pills-delete {
+        background: none;
+        margin: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > svg {
+          margin-top: 0;
+          transition: 0.2s;
+          opacity: 0.7;
+        }
+
+        &:hover {
+          > svg {
+            opacity: 1;
+            margin-top: -8px;
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const Title = styled.h2`

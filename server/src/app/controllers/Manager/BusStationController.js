@@ -1,82 +1,140 @@
+import Sequelize from 'sequelize'
 import { googleApi } from '../../../services/api'
 import CityScanned from '../../models/CityScanned'
-import { sleep } from '../../../lib/Utils'
 import BusStation from '../../models/BusStation'
-import Company from '../../models/Company'
+import Address from '../../models/Address'
+import { sleep } from '../../../lib/Utils'
 
 class BusStationController {
 	async index(req, res) {
-		const company = await Company.findByPk(req.user.companyId)
-		await company.update({
-			lastSearchCity: req.query.city,
-			lastSearchState: req.query.state,
-		})
+		const { city, uf } = req.query
 
-		const city = req.query.city.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-		const state = req.query.state
-			.normalize('NFD')
-			.replace(/[\u0300-\u036f]/g, '')
+		const cityQuery = `${city} - ${uf}`
 
-		const cityQuery = `bus stations in ${city.toLowerCase()} - ${state.toLowerCase()}`
-
-		const allPlaces = []
-		async function getAllPages(nextPageToken) {
-			let query = `/place/textsearch/json?query=${cityQuery}&key=${process.env.GOOGLE_TEXTSEARCH}`
-			if (nextPageToken) {
-				query += `&pagetoken=${nextPageToken}`
-			}
-			query.replace(/ /g, '%20')
-			const getResults = await googleApi.get(query)
-			allPlaces.splice(allPlaces.length, 0, ...getResults.data.results)
-
-			if (getResults.data.next_page_token) {
-				await sleep(3000)
-				await getAllPages(getResults.data.next_page_token)
-			}
-		}
-
-		const findCity = await CityScanned.findOne({
+		const findCityScanned = await CityScanned.findOne({
 			where: { cityQuery },
-			include: [{ model: BusStation, as: 'busStations' }],
+			attributes: ['cityQuery'],
+			include: [
+				{
+					model: BusStation,
+					as: 'busStations',
+					attributes: ['id', 'name', 'placeId', 'lat', 'lng'],
+				},
+			],
 		})
 
-		if (findCity) {
-			return res.json(findCity)
+		if (findCityScanned) {
+			return res.json(findCityScanned)
 		}
 
-		const cityScanned = await CityScanned.create({
-			cityQuery,
-			createdById: req.user.id,
+		function normalize(string) {
+			return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+		}
+
+		const neighborhoods = await Address.findAll({
+			where: { city, uf },
+			attributes: [
+				'neighborhood',
+				'city',
+				'uf',
+				'lat',
+				'lng',
+				Sequelize.fn('count', Sequelize.col('cep')),
+			],
+			group: ['neighborhood', 'city', 'uf', 'lat', 'lng'],
 		})
 
-		await getAllPages()
-
-		await Promise.all(
-			allPlaces.map(async (place) => {
-				const findStation = await BusStation.findByPk(place.id)
-				if (findStation) {
-					console('Lugar ja existe:', place.name, place.id)
-					return findStation
+		const allNeighborhoods = await Promise.all(
+			neighborhoods.map(async (address) => {
+				if (!address.lat || !address.lng) {
+					const { data } = await googleApi.get(
+						`/place/textsearch/json?query=${normalize(
+							address.neighborhood
+						)}, ${normalize(city)} - ${uf}&key=${process.env.GOOGLE_TEXTSEARCH}`
+					)
+					const lat =
+						(data.results[0] && data.results[0].geometry.location.lat) || null
+					const lng =
+						(data.results[0] && data.results[0].geometry.location.lng) || null
+					return Address.update(
+						{ lat, lng },
+						{ where: { city, uf, neighborhood: address.neighborhood } }
+					)
 				}
-
-				const station = await BusStation.create({
-					id: place.id,
-					name: place.name,
-					placeTypes: place.types,
-					lat: place.geometry.location.lat,
-					lng: place.geometry.location.lng,
-					cityScannedId: cityScanned.id,
-				})
-				return station
+				return address
 			})
 		)
 
-		const findCreatedCity = await CityScanned.findOne({
+		async function getAllPages(address, nextPageToken) {
+			const allResults = []
+			const { data } = await googleApi.get(
+				`/place/nearbysearch/json?location=${address.lat},${
+					address.lng
+				}&radius=1000&types=transit_station&types=bus_station&types=train_station&types=moving_company&key=${
+					process.env.GOOGLE_TEXTSEARCH
+				}${nextPageToken ? `&pagetoken=${nextPageToken}` : ''}`
+			)
+
+			allResults.splice(0, 0, ...data.results)
+
+			if (data.next_page_token) {
+				sleep(1000)
+				allResults.splice(
+					0,
+					0,
+					await getAllPages(address, data.next_page_token)
+				)
+			}
+
+			return allResults
+		}
+
+		const cityScanned = await CityScanned.create({ cityQuery })
+
+		await Promise.all(
+			allNeighborhoods.map(async (address) => {
+				if (address.lat && address.lng) {
+					return Promise.all(
+						(await getAllPages(address)).map(async (item) => {
+							if (item.geometry) {
+								return BusStation.findOrCreate({
+									where: {
+										id: item.id,
+										name: item.name,
+										placeId: item.place_id,
+										types: JSON.stringify(item.types),
+										lat: item.geometry.location.lat,
+										lng: item.geometry.location.lng,
+										cityScannedId: cityScanned.id,
+									},
+								})
+							}
+						})
+					)
+				}
+				return address
+			})
+		)
+
+		const findNewCityScanned = await CityScanned.findOne({
 			where: { cityQuery },
-			include: [{ model: BusStation, as: 'busStations' }],
+			attributes: ['cityQuery'],
+			include: [
+				{
+					model: BusStation,
+					as: 'busStations',
+					attributes: ['id', 'name', 'placeId', 'lat', 'lng'],
+				},
+			],
 		})
 
-		return res.json(findCreatedCity)
+		return res.json(findNewCityScanned)
+	}
+
+	async store(req, res) {
+		const { lat, lng } = req.body
+
+		return res.json({ lat, lng })
 	}
 }
 

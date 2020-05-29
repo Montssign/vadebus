@@ -19,11 +19,11 @@ module.exports = {
 				allowNull: true,
 			},
 			lat: {
-				type: Sequelize.STRING(20),
+				type: Sequelize.DOUBLE,
 				allowNull: false,
 			},
 			lng: {
-				type: Sequelize.STRING(20),
+				type: Sequelize.DOUBLE,
 				allowNull: false,
 			},
 			cityScannedId: {

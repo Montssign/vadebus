@@ -50,16 +50,68 @@ export const ModalContent = styled.section`
   margin-top: 16px;
   font-size: 40px;
 
-  h6 {
+  > h6 {
     margin-bottom: 16px;
   }
 
+  > button {
+    width: 100%;
+    margin: 5px 0 0;
+    height: 44px;
+    background: #3b9eff;
+    font-weight: bold;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.03, '#3b9eff')};
+    }
+  }
+`;
+
+export const Form = styled.form`
+  width: 100%;
+  max-width: ${props => props.maxwidth}px;
+  display: flex;
+
   input {
-    background: rgba(0, 0, 0, 0.1);
-    color: #222;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 0;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 15px;
+    color: #fff;
+    margin: 0 0 10px;
 
     &::placeholder {
-      color: #555;
+      color: rgba(255, 255, 255, 0.7);
     }
+  }
+
+  input[name='estimatedTime'] {
+    width: fit-content;
+    margin-left: 16px;
+    cursor: default;
+  }
+`;
+export const Button = styled.button`
+  width: 100%;
+  max-width: 350px;
+  margin: 5px 0 0;
+  height: 44px;
+  background: #3b9eff;
+  font-weight: bold;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${darken(0.03, '#3b9eff')};
   }
 `;

@@ -59,8 +59,8 @@ function Dashboard() {
         {
           data: [0, 0, 0, 0],
           backgroundColor: [
-            'rgba(255, 159, 64,1)',
-            'rgba(75, 192, 192, 1)',
+            // 'rgba(255, 159, 64,1)',
+            // 'rgba(75, 192, 192, 1)',
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
           ],
@@ -68,7 +68,12 @@ function Dashboard() {
         },
       ],
 
-      labels: ['Bilhete Único', 'BOM', 'Dinheiro', 'Online'],
+      labels: [
+        // 'Bilhete Único',
+        // 'BOM',
+        'Dinheiro',
+        'Online',
+      ],
     }),
     []
   );
@@ -78,27 +83,13 @@ function Dashboard() {
       datasets: [
         {
           data: [0, 0, 0, 0],
-          label: 'Bilhete Único',
+          label: 'Passageiros anônimos',
           backgroundColor: ['rgba(255, 159, 64,0)'],
-          borderColor: ['rgba(255, 159, 64,1)'],
-        },
-        {
-          data: [0, 0, 0, 0],
-          label: 'BOM',
-          backgroundColor: ['rgba(75, 192, 192, 0)'],
-          borderColor: ['rgba(75, 192, 192, 1)'],
-        },
-        {
-          data: [0, 0, 0, 0],
-          label: 'Dinheiro',
-
-          backgroundColor: ['rgba(255, 99, 132, 0)'],
           borderColor: ['rgba(255, 99, 132, 1)'],
         },
         {
           data: [0, 0, 0, 0],
-          label: 'Online',
-
+          label: 'Novos passageiros',
           backgroundColor: ['rgba(54, 162, 235, 0)'],
           borderColor: ['rgba(54, 162, 235, 1)'],
         },

@@ -18,6 +18,8 @@ class Company extends Model {
 				active: Sequelize.BOOLEAN,
 				lastSearchCity: Sequelize.STRING,
 				lastSearchState: Sequelize.STRING,
+				locationLat: Sequelize.DOUBLE,
+				locationLng: Sequelize.DOUBLE,
 			},
 			{
 				sequelize,

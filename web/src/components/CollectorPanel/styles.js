@@ -20,14 +20,20 @@ export const TitleContainer = styled.div`
   h3 {
     font-size: 20px;
     text-transform: capitalize;
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h4 {
     font-size: 16px;
     font-weight: normal;
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .options-buttons {
+  > section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,6 +90,7 @@ export const TitleContainer = styled.div`
     }
   }
 `;
+
 export const ModalContent = styled.section`
   margin-top: 16px;
   font-size: 20px;

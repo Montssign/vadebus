@@ -1,7 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
+import produce from 'immer';
+import { MdDelete } from 'react-icons/md';
 import { Container, Title } from './styles';
 
 import Body from '~/components/Body';
@@ -13,6 +15,10 @@ import { sanitizeNumber, maskValues } from '~/utils';
 
 function FormCollectors() {
   const [role, setRole] = useState('driver');
+  const [dropRoutes, setDropRoutes] = useState([]);
+  const [routes, setRoutes] = useState([]);
+  const [route, setRoute] = useState('');
+
   const roleOptions = useMemo(
     () => [
       { id: 'driver', name: 'Motorista' },
@@ -34,6 +40,7 @@ function FormCollectors() {
 
   async function submitForm(values) {
     values.role = role;
+    values.routes = routes;
 
     try {
       await api.post('/collectors', values);
@@ -52,6 +59,45 @@ function FormCollectors() {
       target.value = phoneMask(target.value);
     }
   }
+
+  function removeFromRoutes(id) {
+    setRoutes(
+      produce(routes, draft => {
+        const index = draft.findIndex(item => item.id === id);
+        if (index >= 0) {
+          draft.splice(index, 1);
+        }
+      })
+    );
+  }
+
+  useEffect(() => {
+    async function getRoutes() {
+      const { data } = await api.get('/routes');
+      setDropRoutes(
+        data.map(routeP => {
+          routeP.name = `Rota ${routeP.name}`;
+          return routeP;
+        })
+      );
+    }
+
+    getRoutes();
+  }, []);
+
+  useEffect(() => {
+    if (route) {
+      const routeIndex = dropRoutes.findIndex(item => item.id === route);
+      setRoutes([...routes, dropRoutes[routeIndex]]);
+      setRoute('');
+
+      setDropRoutes(
+        produce(dropRoutes, draft => {
+          draft.splice(routeIndex, 1);
+        })
+      );
+    }
+  }, [route, dropRoutes, routes]);
 
   return (
     <Body>
@@ -102,6 +148,28 @@ function FormCollectors() {
             placeholder={`Uma senha para o ${
               role === 'driver' ? 'Motorista' : 'Cobrador'
             }`}
+          />
+          {routes.length > 0 && (
+            <section className="routes-section">
+              {routes.map(routeP => (
+                <section className="routes-pills" key={routeP.id}>
+                  {routeP.name}
+                  <button
+                    type="button"
+                    onClick={() => removeFromRoutes(routeP.id)}
+                    className="routes-pills-delete"
+                  >
+                    <MdDelete size={25} />
+                  </button>
+                </section>
+              ))}
+            </section>
+          )}
+          <Select
+            options={dropRoutes}
+            value={route}
+            onChange={setRoute}
+            placeholder="Escolha uma ou mais rotas"
           />
           <button type="submit">Criar conta</button>
         </Form>

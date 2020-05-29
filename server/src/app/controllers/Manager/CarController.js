@@ -21,7 +21,7 @@ class CarController {
 			companyId: req.user.companyId,
 		})
 
-		await AssociateCarToRouteService.run({ car, routes })
+		// await AssociateCarToRouteService.run({ car, routes })
 
 		const { id, brand, plate, number, seats } = car
 

@@ -7,14 +7,25 @@ export const TitleContainer = styled.div`
 
   h3 {
     font-size: 20px;
+    width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: default;
   }
 
   h4 {
+    width: 230px;
     font-size: 16px;
     font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: default;
+    margin-right: 16px;
   }
 
-  .options-buttons {
+  > section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,12 +164,49 @@ export const NodeItem = styled.section`
     font-weight: normal;
     max-width: 60px;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: default;
   }
 
   ${Circle} {
     &:hover {
       ${Details} {
         opacity: 1;
+      }
+    }
+  }
+`;
+
+export const ModalContent = styled.section`
+  margin-top: 16px;
+  font-size: 20px;
+
+  p {
+    margin-bottom: 16px;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      padding: 8px;
+      width: 100%;
+      margin: 8px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      color: #f8f7fd;
+      font-weight: bold;
+
+      &:nth-child(1) {
+        background-color: #048ddb;
+      }
+      &:nth-last-child(1) {
+        background-color: #ff2020;
       }
     }
   }

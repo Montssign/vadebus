@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import {
   MdEdit,
   MdDelete,
@@ -8,6 +8,8 @@ import {
 } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import produce from 'immer';
+
+import modalContext from '../Modal/modalContext';
 
 import Row from '../Row';
 import Panel from '../Panel';
@@ -20,8 +22,10 @@ import {
   NodeItem,
   Details,
 } from './styles';
+import ModalDeleteRoute from './ModalDeleteRoute';
 
 function RoutePanel({ data }) {
+  const modal = useContext(modalContext);
   const [showDetails, setShowDetails] = useState(false);
 
   function toggleShowDetails() {
@@ -36,94 +40,109 @@ function RoutePanel({ data }) {
     return '';
   }
 
-  const stops = useMemo(
+  const points = useMemo(
     () =>
-      produce(data.stops, draft => {
-        draft.forEach(stop => {
-          stop.color = extractBusColor(stop);
+      produce(data.points, draft => {
+        draft.forEach(point => {
+          point.color = extractBusColor(point);
         });
       }),
     [data]
   );
 
+  function openModal() {
+    modal.setContent(() => <ModalDeleteRoute route={data} />);
+    modal.setActive(true);
+  }
+
   return (
     <Row>
       <Panel weight={1}>
         <TitleContainer>
-          <h3>Rota {data.name}</h3>
-          <h4>
-            <strong>Início:</strong> {stops[0].name}
-          </h4>
-          <h4>
-            <strong>Final:</strong> {stops[stops.length - 1].name}
-          </h4>
-          <h4>Tempo total: {Math.ceil(data.estimatedTime / 60)} Min.</h4>
+          <section>
+            <h3 title={data.name}>Rota {data.name}</h3>
+            <h4 title={points[0].name}>
+              <strong>Início:</strong> {points[0].name}
+            </h4>
+            <h4 title={points[points.length - 1].name}>
+              <strong>Final:</strong> {points[points.length - 1].name}
+            </h4>
+            <h4 title={`${Math.ceil(data.estimatedTime / 60)} Min.`}>
+              <strong>Tempo total:</strong> {Math.ceil(data.estimatedTime / 60)}{' '}
+              Min.
+            </h4>
+          </section>
           <section className="options-buttons">
             <button type="button">
               <MdEdit color="#048DDB" size={24} />
             </button>
-            <button type="button">
+            <button type="button" onClick={openModal}>
               <MdDelete color="#FF2020" size={24} />
             </button>
+            <button
+              type="button"
+              className="toggle-show-details"
+              onClick={toggleShowDetails}
+            >
+              <MdKeyboardArrowDown
+                className={`toggle-show-icon ${
+                  showDetails ? 'toggle-show-icon-up' : ''
+                }`}
+                size={25}
+              />
+            </button>
           </section>
-          <button
-            type="button"
-            className="toggle-show-details"
-            onClick={toggleShowDetails}
-          >
-            <MdKeyboardArrowDown
-              className={`toggle-show-icon ${
-                showDetails ? 'toggle-show-icon-up' : ''
-              }`}
-              size={25}
-            />
-          </button>
         </TitleContainer>
 
         <NodeContainer active={showDetails}>
-          {stops.map(stop => (
-            <NodeItem key={stop.name}>
+          {points.map((point, index) => (
+            <NodeItem key={point.name}>
               <div className="node">
-                <Circle color={stop.color}>
-                  {stop.details && (
+                <Circle
+                  color={point.color}
+                  title={point.name.replace(/Avenida/g, 'Av.')}
+                >
+                  {point.details && (
                     <Details>
-                      {stop.details.bus &&
-                        stop.details.bus.map(bus => (
+                      {point.details.bus &&
+                        point.details.bus.map(bus => (
                           <p key={bus.number}>
                             <strong>Onibus: </strong>
                             {`${bus.number}, ${bus.status}`}
                           </p>
                         ))}
-                      {stop.details.expectedRise && (
+                      {point.details.expectedRise && (
                         <p>
                           <strong>Subida esperada: </strong>
-                          {stop.details.expectedRise}
+                          {point.details.expectedRise}
                         </p>
                       )}
-                      {stop.details.expectedDescent && (
+                      {point.details.expectedDescent && (
                         <p>
                           <strong>Descida esperada: </strong>
-                          {stop.details.expectedDescent}
+                          {point.details.expectedDescent}
                         </p>
                       )}
                     </Details>
                   )}
 
-                  {stop.details &&
-                    (stop.details.expectedDescent ||
-                      stop.details.expectedRise) && (
+                  {point.details &&
+                    (point.details.expectedDescent ||
+                      point.details.expectedRise) && (
                       <MdNaturePeople color="#f8f7fd" />
                     )}
 
-                  {stop.details &&
-                    stop.details.bus &&
-                    stop.details.bus.length > 0 && (
+                  {point.details &&
+                    point.details.bus &&
+                    point.details.bus.length > 0 && (
                       <MdDirectionsBus color="#f8f7fd" />
                     )}
                 </Circle>
-                {!stop.isLast && <Line />}
+                {!(index === points.length - 1) && <Line />}
               </div>
-              <h5>{stop.name}</h5>
+              <h5 title={point.name.replace(/Avenida/g, 'Av.')}>
+                {point.name.replace(/Avenida/g, 'Av.')}
+              </h5>
             </NodeItem>
           ))}
         </NodeContainer>
@@ -137,7 +156,7 @@ RoutePanel.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
     estimatedTime: PropTypes.number,
-    stops: PropTypes.arrayOf(
+    points: PropTypes.arrayOf(
       PropTypes.shape({
         location: PropTypes.shape({
           lat: PropTypes.number,

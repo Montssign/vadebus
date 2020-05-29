@@ -20,14 +20,16 @@ export const TitleContainer = styled.div`
   h3 {
     font-size: 20px;
     text-transform: capitalize;
+    width: 200px;
   }
 
   h4 {
     font-size: 16px;
     font-weight: normal;
+    width: 150px;
   }
 
-  .options-buttons {
+  > section {
     display: flex;
     justify-content: center;
     align-items: center;

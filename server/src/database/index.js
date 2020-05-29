@@ -12,6 +12,7 @@ import Route from '../app/models/Route'
 import Point from '../app/models/Point'
 import CityScanned from '../app/models/CityScanned'
 import BusStation from '../app/models/BusStation'
+import Address from '../app/models/Address'
 
 const models = [
 	User,
@@ -23,6 +24,7 @@ const models = [
 	Point,
 	CityScanned,
 	BusStation,
+	Address,
 ]
 
 class Database {

@@ -26,6 +26,8 @@ import RouteController from '../app/controllers/Manager/RouteController'
 import PointController from '../app/controllers/Manager/PointController'
 import BusStationController from '../app/controllers/Manager/BusStationController'
 import FileController from '../app/controllers/FileController'
+import CompanyController from '../app/controllers/Manager/CompanyController'
+import AddressController from '../app/controllers/Manager/AddressController'
 
 const routes = Router()
 const upload = multer(multerConfg)
@@ -81,6 +83,11 @@ routes.put('/points/:id', validatePointUpdate, PointController.update)
 routes.delete('/points/:id', PointController.destroy)
 
 routes.get('/bus-stations', BusStationController.index)
+
+routes.get('/addresses', AddressController.index)
+
+routes.get('/companies', CompanyController.show)
+routes.put('/companies', CompanyController.update)
 
 routes.get('/files', FileController.index)
 routes.post('/files', upload.array('file', 5), FileController.store)

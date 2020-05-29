@@ -21,21 +21,23 @@ function CarPanel({ data }) {
     <Row>
       <Panel weight={1}>
         <TitleContainer>
-          <div className="collector-profile">
-            <h3>Carro {data.number}</h3>
-          </div>
-          <h4>
-            <strong>Placa: </strong>
-            {data.plate}
-          </h4>
-          <h4>
-            <strong>Acentos: </strong>
-            {data.seats}
-          </h4>
-          <h4>
-            <strong>Marca: </strong>
-            {data.brand}
-          </h4>
+          <section>
+            <div className="collector-profile">
+              <h3>Carro {data.number}</h3>
+            </div>
+            <h4>
+              <strong>Placa: </strong>
+              {data.plate}
+            </h4>
+            <h4>
+              <strong>Acentos: </strong>
+              {data.seats}
+            </h4>
+            <h4>
+              <strong>Marca: </strong>
+              {data.brand}
+            </h4>
+          </section>
           <section className="options-buttons">
             <button type="button">
               <MdEdit color="#048DDB" size={24} />
